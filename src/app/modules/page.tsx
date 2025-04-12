@@ -119,11 +119,11 @@ export default function ModulesPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8 animate-fade-in">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 lg:p-12">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
         Explore Our <span className="text-primary">Modules</span>
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
         {modules.map((module) => (
           <Card
             key={module.id}
@@ -132,17 +132,17 @@ export default function ModulesPage() {
             }`}
           >
             <CardHeader>
-              <CardTitle className="flex items-center justify-between">
+              <CardTitle className="flex items-center justify-between text-lg">
                 {module.title}
                 {module.isCompleted ? (
-                  <CheckCircle className="h-6 w-6 text-green-500" />
+                  <CheckCircle className="h-5 w-5 text-green-500" />
                 ) : isModuleAvailable(module.id) ? (
                   <LockOpen className="h-4 w-4 text-gray-500" />
                 ) : (
                   <Lock className="h-4 w-4 text-gray-400" />
                 )}
               </CardTitle>
-              <CardDescription>{module.description}</CardDescription>
+              <CardDescription className="text-sm">{module.description}</CardDescription>
             </CardHeader>
             <CardContent>
               <ul>

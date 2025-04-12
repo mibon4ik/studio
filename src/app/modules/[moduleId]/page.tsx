@@ -114,16 +114,16 @@ export default function ModulePage({params}: { params: { moduleId: string } }) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-8">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8 animate-fade-in">
+    <div className="flex flex-col items-center justify-start min-h-screen p-4 md:p-8 lg:p-12">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
         Module {moduleId} <span className="text-primary">Content</span>
       </h1>
 
       <div className="w-full max-w-3xl">
-        <Card className="mb-8 animate-slide-in-bottom">
+        <Card className="mb-6 animate-slide-in-bottom">
           <CardHeader>
-            <CardTitle>Video Lecture</CardTitle>
-            <CardDescription>Watch this video to learn more about the module.</CardDescription>
+            <CardTitle className="text-xl">Video Lecture</CardTitle>
+            <CardDescription className="text-sm">Watch this video to learn more about the module.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="aspect-w-16 aspect-h-9">
@@ -138,8 +138,8 @@ export default function ModulePage({params}: { params: { moduleId: string } }) {
 
         <Card className="animate-slide-in-bottom">
           <CardHeader>
-            <CardTitle>Mini-Test</CardTitle>
-            <CardDescription>Test your knowledge with this short quiz.</CardDescription>
+            <CardTitle className="text-xl">Mini-Test</CardTitle>
+            <CardDescription className="text-sm">Test your knowledge with this short quiz.</CardDescription>
           </CardHeader>
           <CardContent>
             {!quizCompleted ? (
