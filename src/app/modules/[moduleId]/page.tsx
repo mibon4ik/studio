@@ -5,6 +5,7 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/compo
 import {Input} from '@/components/ui/input';
 import {useRouter} from 'next/navigation';
 import {useState} from 'react';
+import React from 'react';
 
 const rickRollUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 
@@ -83,8 +84,8 @@ const quizQuestions = {
   ],
 };
 
-export default function ModulePage({params}) {
-  const {moduleId} = params;
+export default function ModulePage({params}: { params: { moduleId: string } }) {
+  const {moduleId} = React.use(Promise.resolve(params));
   const router = useRouter();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
