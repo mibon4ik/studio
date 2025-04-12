@@ -17,7 +17,13 @@ export default function Navigation() {
 
   return (
     <nav className="bg-secondary text-secondary-foreground p-4">
-      <ul className="flex justify-center space-x-6 md:space-x-8 lg:space-x-10">
+      <ul className="flex justify-center space-x-6 md:space-x-8 lg:space-x-10" style={{
+        position: 'relative',
+        left: 0,
+        right: 0,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      }}>
         <li>
           <Link href="/" className="hover:text-primary transition-colors duration-300">
             Главная
