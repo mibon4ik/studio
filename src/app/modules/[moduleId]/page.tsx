@@ -9,6 +9,7 @@ import React from 'react';
 import {useParams} from 'next/navigation';
 import {useToast} from '@/hooks/use-toast';
 import {useModuleStore} from '@/store/moduleStore';
+import {useAuth} from '@/hooks/use-auth';
 
 const modulesData = [
   {
@@ -54,7 +55,7 @@ const modulesData = [
   {
     id: 3,
     title: 'Складская логистика',
-    description: 'Типы складов, принципы размещения, FIFO, LIFO, ABC-анализ.',
+    description: 'Типы складов и их функции, принципы размещения товаров, FIFO, LIFO, ABC-анализ.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     quizQuestions: [
       {
@@ -148,8 +149,15 @@ export default function ModulePage() {
   const [module, setModule] = useState(null);
   const [videoError, setVideoError] = useState(false);
   const {toast} = useToast();
+  const {user} = useAuth();
 
   const {completeModule} = useModuleStore();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/login');
+    }
+  }, [user, router]);
 
   useEffect(() => {
     const currentModule = modulesData.find(m => m.id === parseInt(moduleId as string));

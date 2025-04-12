@@ -8,6 +8,7 @@ import React from 'react';
 import {useRouter} from 'next/navigation';
 import {useToast} from '@/hooks/use-toast';
 import {useModuleStore} from '@/store/moduleStore';
+import {useAuth} from '@/hooks/use-auth';
 
 const modulesData = [
   {
@@ -136,6 +137,13 @@ export default function ModulesPage() {
   const {completedModules, completeModule} = useModuleStore();
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const router = useRouter();
+  const {user} = useAuth();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/login');
+    }
+  }, [user, router]);
 
   useEffect(() => {
     cardRefs.current = cardRefs.current.slice(0, modulesData.length);
