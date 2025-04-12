@@ -121,7 +121,7 @@ export default function ModulesPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 lg:p-12">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
-        Explore Our <span className="text-primary">Modules</span>
+        Изучите Наши <span className="text-primary">Модули</span>
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
         {modules.map((module) => (
@@ -166,9 +166,9 @@ export default function ModulesPage() {
                 }`}
               >
                 {isModuleAvailable(module.id) ? (
-                  `Learn more about ${module.title}`
+                  `Узнать больше о ${module.title}`
                 ) : (
-                  <span className="text-gray-500">Locked. Complete previous modules.</span>
+                  <span className="text-gray-500">Заблокировано. Завершите предыдущие модули.</span>
                 )}
               </Link>
             </CardContent>
@@ -177,4 +177,4 @@ export default function ModulesPage() {
       </div>
     </div>
   );
-}
+  }

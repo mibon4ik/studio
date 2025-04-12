@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Logistics Ace',
-  description: 'Learn the basics of logistics with this interactive learning platform.',
+  title: 'Логистика Ace',
+  description: 'Изучите основы логистики с помощью этой интерактивной обучающей платформы.',
   // Add other meta tags for better SEO
   // Example:
   // viewport: 'width=device-width, initial-scale=1',
@@ -45,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Toaster />
         <SidebarProvider>
@@ -54,29 +54,29 @@ export default function RootLayout({
               <ul className="flex justify-center space-x-6 md:space-x-8 lg:space-x-10">
                 <li>
                   <Link href="/" className="hover:text-primary transition-colors duration-300">
-                    Home
+                    Главная
                   </Link>
                 </li>
                 <li>
                   <Link href="/modules" className="hover:text-primary transition-colors duration-300">
-                    Modules
+                    Модули
                   </Link>
                 </li>
                 <li>
                   <Link href="/dictionary" className="hover:text-primary transition-colors duration-300">
-                    Dictionary
+                    Словарь
                   </Link>
                 </li>
                 <li>
                   <Link href="/contacts" className="hover:text-primary transition-colors duration-300">
-                    Contact
+                    Контакты
                   </Link>
                 </li>
               </ul>
             </nav>
             <main className="flex-1">{children}</main>
             <footer className="bg-secondary text-secondary-foreground p-4 text-center">
-              <p>&copy; {new Date().getFullYear()} Logistics Ace. All rights reserved.</p>
+              <p>&copy; {new Date().getFullYear()} Логистика Ace. Все права защищены.</p>
             </footer>
           </div>
         </SidebarProvider>

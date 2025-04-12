@@ -4,11 +4,11 @@ import {Input} from '@/components/ui/input';
 import {useEffect, useState} from 'react';
 
 const terms = [
-  {id: 1, term: 'Logistics', definition: 'The process of planning, implementing, and controlling procedures for the efficient and effective transportation and storage of goods including services and related information from the point of origin to the point of consumption for the purpose of conforming to customer requirements.'},
-  {id: 2, term: 'Supply Chain', definition: 'A network between a company and its suppliers to produce and distribute a specific product, and the supply chain represents the steps it takes to get the product or service to the customer.'},
-  {id: 3, term: 'Warehouse', definition: 'A planned space for the storage and handling of goods and materials.'},
-  {id: 4, term: 'Transportation', definition: 'The movement of people, goods, or services from one location to another.'},
-  {id: 5, term: 'Inventory', definition: 'A complete list of items such as property, goods in stock, or the contents of a building.'},
+  {id: 1, term: 'Логистика', definition: 'Процесс планирования, реализации и контроля процедур для эффективной и результативной транспортировки и хранения товаров, включая услуги и соответствующую информацию от точки происхождения до точки потребления с целью соответствия требованиям клиента.'},
+  {id: 2, term: 'Цепь поставок', definition: 'Сеть между компанией и ее поставщиками для производства и распространения конкретного продукта, и цепь поставок представляет собой шаги, необходимые для доставки продукта или услуги клиенту.'},
+  {id: 3, term: 'Склад', definition: 'Запланированное пространство для хранения и обработки товаров и материалов.'},
+  {id: 4, term: 'Транспортировка', definition: 'Перемещение людей, товаров или услуг из одного места в другое.'},
+  {id: 5, term: 'Инвентарь', definition: 'Полный список предметов, таких как имущество, товары в наличии или содержимое здания.'},
 ];
 
 export default function DictionaryPage() {
@@ -33,12 +33,12 @@ export default function DictionaryPage() {
   return (
     <div className="flex flex-col items-center justify-start min-h-screen p-8">
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8 animate-fade-in">
-        Logistics <span className="text-primary">Glossary</span>
+        Логистический <span className="text-primary">Глоссарий</span>
       </h1>
 
       <Input
         type="text"
-        placeholder="Search for a term"
+        placeholder="Поиск термина"
         className="w-full md:w-1/2 mb-4 rounded-full shadow-md transition-all duration-300 focus:ring-primary focus:border-primary animate-slide-in-bottom"
         value={searchTerm}
         onChange={handleSearchChange}

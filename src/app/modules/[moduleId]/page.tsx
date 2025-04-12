@@ -12,74 +12,74 @@ const rickRollUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 const quizQuestions = {
   1: [
     {
-      question: 'What is logistics?',
-      options: ['The art of war', 'The process of planning and executing the efficient transportation and storage of goods', 'A type of dance', 'A branch of medicine'],
-      correctAnswer: 'The process of planning and executing the efficient transportation and storage of goods',
+      question: 'Что такое логистика?',
+      options: ['Искусство войны', 'Процесс планирования и выполнения эффективной транспортировки и хранения товаров', 'Вид танца', 'Раздел медицины'],
+      correctAnswer: 'Процесс планирования и выполнения эффективной транспортировки и хранения товаров',
     },
     {
-      question: 'What is the role of a logistician?',
-      options: ['To make coffee', 'To manage the flow of goods and information', 'To design buildings', 'To write novels'],
-      correctAnswer: 'To manage the flow of goods and information',
+      question: 'Какова роль логиста?',
+      options: ['Делать кофе', 'Управлять потоком товаров и информации', 'Проектировать здания', 'Писать романы'],
+      correctAnswer: 'Управлять потоком товаров и информации',
     },
   ],
   2: [
     {
-      question: 'What is a supply chain?',
-      options: ['A metal chain used for supplies', 'A network between a company and its suppliers to produce and distribute a specific product', 'A type of cooking method', 'A government regulation'],
-      correctAnswer: 'A network between a company and its suppliers to produce and distribute a specific product',
+      question: 'Что такое цепь поставок?',
+      options: ['Металлическая цепь для поставок', 'Сеть между компанией и ее поставщиками для производства и распространения конкретного продукта', 'Способ приготовления пищи', 'Государственное регулирование'],
+      correctAnswer: 'Сеть между компанией и ее поставщиками для производства и распространения конкретного продукта',
     },
     {
-      question: 'What are Incoterms?',
-      options: ['A type of insect', 'International Commercial Terms defining responsibilities of sellers and buyers for delivery of goods', 'A brand of ink', 'A style of interior design'],
-      correctAnswer: 'International Commercial Terms defining responsibilities of sellers and buyers for delivery of goods',
+      question: 'Что такое Инкотермс?',
+      options: ['Вид насекомого', 'Международные коммерческие условия, определяющие обязанности продавцов и покупателей при доставке товаров', 'Марка чернил', 'Стиль дизайна интерьера'],
+      correctAnswer: 'Международные коммерческие условия, определяющие обязанности продавцов и покупателей при доставке товаров',
     },
   ],
   3: [
     {
-      question: 'What is warehouse logistics?',
-      options: ['The study of clouds', 'Managing storage and handling of goods in a warehouse', 'A type of music', 'The process of making bread'],
-      correctAnswer: 'Managing storage and handling of goods in a warehouse',
+      question: 'Что такое складская логистика?',
+      options: ['Изучение облаков', 'Управление хранением и обработкой товаров на складе', 'Вид музыки', 'Процесс приготовления хлеба'],
+      correctAnswer: 'Управление хранением и обработкой товаров на складе',
     },
     {
-      question: 'What is FIFO?',
-      options: ['A type of dog food', 'First In, First Out - an inventory valuation method', 'A kind of bird', 'A brand of car'],
-      correctAnswer: 'First In, First Out - an inventory valuation method',
+      question: 'Что такое FIFO?',
+      options: ['Вид корма для собак', 'Первый пришел, первый ушел - метод оценки запасов', 'Вид птицы', 'Марка автомобиля'],
+      correctAnswer: 'Первый пришел, первый ушел - метод оценки запасов',
     },
   ],
   4: [
     {
-      question: 'What is transport logistics?',
-      options: ['The study of ancient cultures', 'Optimizing transportation of goods', 'A type of sport', 'The art of painting'],
-      correctAnswer: 'Optimizing transportation of goods',
+      question: 'Что такое транспортная логистика?',
+      options: ['Изучение древних культур', 'Оптимизация транспортировки товаров', 'Вид спорта', 'Искусство живописи'],
+      correctAnswer: 'Оптимизация транспортировки товаров',
     },
     {
-      question: 'What is the main goal of transport logistics?',
-      options: ['To waste as much time as possible', 'To move goods efficiently and cost-effectively', 'To create traffic jams', 'To pollute the environment'],
-      correctAnswer: 'To move goods efficiently and cost-effectively',
+      question: 'Какова основная цель транспортной логистики?',
+      options: ['Потратить как можно больше времени', 'Перемещать товары эффективно и экономично', 'Создавать пробки', 'Загрязнять окружающую среду'],
+      correctAnswer: 'Перемещать товары эффективно и экономично',
     },
   ],
   5: [
     {
-      question: 'What is inventory management?',
-      options: ['The process of counting stars', 'Methods and techniques to efficiently manage stock levels', 'A type of dance', 'The process of making cheese'],
-      correctAnswer: 'Methods and techniques to efficiently manage stock levels',
+      question: 'Что такое управление запасами?',
+      options: ['Процесс подсчета звезд', 'Методы и техники для эффективного управления уровнями запасов', 'Вид танца', 'Процесс приготовления сыра'],
+      correctAnswer: 'Методы и техники для эффективного управления уровнями запасов',
     },
     {
-      question: 'What is demand forecasting?',
-      options: ['Predicting the weather', 'Estimating future customer demand', 'A type of magic trick', 'The process of making wine'],
-      correctAnswer: 'Estimating future customer demand',
+      question: 'Что такое прогнозирование спроса?',
+      options: ['Предсказание погоды', 'Оценка будущего спроса клиентов', 'Вид фокуса', 'Процесс приготовления вина'],
+      correctAnswer: 'Оценка будущего спроса клиентов',
     },
   ],
   6: [
     {
-      question: 'What is international logistics?',
-      options: ['The study of languages', 'Managing the flow of goods across international borders', 'A type of sport', 'The art of sculpting'],
-      correctAnswer: 'Managing the flow of goods across international borders',
+      question: 'Что такое международная логистика?',
+      options: ['Изучение языков', 'Управление потоком товаров через международные границы', 'Вид спорта', 'Искусство скульптуры'],
+      correctAnswer: 'Управление потоком товаров через международные границы',
     },
     {
-      question: 'What is customs clearance?',
-      options: ['A type of toothpaste', 'The process of complying with import/export regulations', 'A brand of car', 'A style of music'],
-      correctAnswer: 'The process of complying with import/export regulations',
+      question: 'Что такое таможенное оформление?',
+      options: ['Вид зубной пасты', 'Процесс соблюдения правил импорта/экспорта', 'Марка автомобиля', 'Стиль музыки'],
+      correctAnswer: 'Процесс соблюдения правил импорта/экспорта',
     },
   ],
 };
@@ -116,14 +116,14 @@ export default function ModulePage({params}: { params: { moduleId: string } }) {
   return (
     <div className="flex flex-col items-center justify-start min-h-screen p-4 md:p-8 lg:p-12">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
-        Module {moduleId} <span className="text-primary">Content</span>
+        Модуль {moduleId} <span className="text-primary">Содержание</span>
       </h1>
 
       <div className="w-full max-w-3xl">
         <Card className="mb-6 animate-slide-in-bottom">
           <CardHeader>
-            <CardTitle className="text-xl">Video Lecture</CardTitle>
-            <CardDescription className="text-sm">Watch this video to learn more about the module.</CardDescription>
+            <CardTitle className="text-xl">Видео Лекция</CardTitle>
+            <CardDescription className="text-sm">Посмотрите это видео, чтобы узнать больше о модуле.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="aspect-w-16 aspect-h-9">
@@ -138,8 +138,8 @@ export default function ModulePage({params}: { params: { moduleId: string } }) {
 
         <Card className="animate-slide-in-bottom">
           <CardHeader>
-            <CardTitle className="text-xl">Mini-Test</CardTitle>
-            <CardDescription className="text-sm">Test your knowledge with this short quiz.</CardDescription>
+            <CardTitle className="text-xl">Мини-Тест</CardTitle>
+            <CardDescription className="text-sm">Проверьте свои знания с помощью этого короткого теста.</CardDescription>
           </CardHeader>
           <CardContent>
             {!quizCompleted ? (
@@ -163,14 +163,14 @@ export default function ModulePage({params}: { params: { moduleId: string } }) {
                   ))}
                 </ul>
                 <Button onClick={handleNextQuestion} disabled={!selectedAnswer} className="transition-all duration-300">
-                  {currentQuestionIndex === questions.length - 1 ? 'Finish Quiz' : 'Next Question'}
+                  {currentQuestionIndex === questions.length - 1 ? 'Завершить Тест' : 'Следующий Вопрос'}
                 </Button>
               </div>
             ) : (
               <div className="text-center">
-                <h3 className="text-xl font-semibold mb-4">Quiz Completed!</h3>
-                <p className="text-lg">Your Score: {score} / {questions.length}</p>
-                <Button onClick={() => router.push('/modules')} className="transition-all duration-300">Back to Modules</Button>
+                <h3 className="text-xl font-semibold mb-4">Тест Завершен!</h3>
+                <p className="text-lg">Ваш Счет: {score} / {questions.length}</p>
+                <Button onClick={() => router.push('/modules')} className="transition-all duration-300">Обратно к Модулям</Button>
               </div>
             )}
           </CardContent>
@@ -179,5 +179,3 @@ export default function ModulePage({params}: { params: { moduleId: string } }) {
     </div>
   );
 }
-
-
