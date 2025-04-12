@@ -1,3 +1,4 @@
+
 'use client';
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
@@ -50,7 +51,7 @@ const modulesData = [
   {
     id: 3,
     title: 'Складская логистика',
-    description: 'Типы складов, принципы размещения, FIFO, LIFO, ABC-анализ.',
+    description: 'Типы складов и их функции, принципы размещения товаров, FIFO, LIFO, ABC-анализ.',
     videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     quizQuestions: [
       {
@@ -133,6 +134,32 @@ export default function ModulesPage() {
   const [modules, setModules] = useState(modulesData);
   const [completedModules, setCompletedModules] = useState<number[]>([]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const userId = 'user123'; // Replace with actual user ID
+
+    useEffect(() => {
+        const getCompletedModules = async () => {
+            try {
+                const response = await fetch(`http://localhost:3001/completed/${userId}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setCompletedModules(data);
+                    // Update module completion status based on fetched data
+                    setModules(prevModules => {
+                        return prevModules.map(module => ({
+                            ...module,
+                            isCompleted: data.includes(module.id)
+                        }));
+                    });
+                } else {
+                    console.error('Failed to fetch completed modules:', response.status);
+                }
+            } catch (error) {
+                console.error('Error fetching completed modules:', error);
+            }
+        };
+
+        getCompletedModules();
+    }, [userId]);
 
   const isModuleAvailable = (moduleId: number) => {
     const module = modules.find((m) => m.id === moduleId);
@@ -146,14 +173,27 @@ export default function ModulesPage() {
     return true;
   };
 
-  const handleModuleComplete = (moduleId: number) => {
-    setCompletedModules(prev => [...prev, moduleId]);
-    setModules(prevModules =>
-      prevModules.map(module =>
-        module.id === moduleId ? {...module, isCompleted: true} : module
-      )
-    );
+  const handleModuleComplete = async (moduleId: number) => {
+      try {
+          const response = await fetch(`http://localhost:3001/complete/${userId}/${moduleId}`, {
+              method: 'POST',
+          });
+
+          if (response.ok) {
+              setCompletedModules(prev => [...prev, moduleId]);
+              setModules(prevModules =>
+                  prevModules.map(module =>
+                      module.id === moduleId ? {...module, isCompleted: true} : module
+                  )
+              );
+          } else {
+              console.error('Failed to complete module:', response.status);
+          }
+      } catch (error) {
+          console.error('Error completing module:', error);
+      }
   };
+
 
   useEffect(() => {
     cardRefs.current = cardRefs.current.slice(0, modules.length);
@@ -230,7 +270,8 @@ export default function ModulesPage() {
                 <div>
                 {isModuleAvailable(module.id) ? (
                   <Link
-                  href={`/modules/${module.id}`}
+                    href={`/modules/${module.id}`}
+                    onClick={() => handleModuleComplete(module.id)}
                     className="text-primary hover:underline"
                   >
                     Перейти к модулю
