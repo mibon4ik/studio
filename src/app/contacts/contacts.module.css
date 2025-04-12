@@ -1,57 +1,40 @@
-
+/* Style for the entire page container */
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px; /* Added padding for smaller screens */
-  box-sizing: border-box; /* Ensures padding is included in the element's total width and height */
   flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: flex-start; /* Align content to the top */
+  min-height: 100vh; /* Ensure full viewport height */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.content {
+/* Style for the content wrapper to control maximum width */
+.contentWrapper {
+  width: 100%;
+  max-width: 1200px; /* Adjust as needed for your design */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%; /* Take up full width */
-  max-width: 1200px; /* Maximum width for larger screens */
-  padding: 20px; /* Consistent padding */
-  box-sizing: border-box; /* Ensures padding is included in the element's total width and height */
+  align-items: center; /* Center items horizontally */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* Form container to control width */
+/* Style for the form container to control form width */
 .formContainer {
   width: 100%;
-  max-width: 600px; /* Adjust for desired form width */
-  margin: 0 auto; /* Center the form horizontally */
+  max-width: 600px; /* Adjust the maximum width of the form */
+  margin: 20px auto; /* Add top/bottom margin and center horizontally */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* Media queries for larger screens */
-@media (min-width: 768px) {
-  .content {
-    padding: 30px; /* Increased padding for medium screens */
-  }
-  .formContainer {
-    width: 80%; /* Adjust form width for medium screens */
-  }
-}
-
-@media (min-width: 992px) {
-  .content {
-    padding: 40px; /* Increased padding for large screens */
-  }
-  .formContainer {
-    width: 60%; /* Adjust form width for large screens */
-  }
-}
-
-/* Ensure consistent styling for form elements */
-/* Adjustments may be needed based on specific components */
+/* General styles for form elements */
 .input,
 .textarea {
   width: 100%;
-  margin-bottom: 15px;
   padding: 10px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
@@ -71,15 +54,33 @@
   background-color: #0056b3;
 }
 
+/* Style for the contact title */
 .contactTitle {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* Additional styling to center the content */
-.centeredContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+  .container {
+    padding: 30px;
+  }
+  .contentWrapper {
+    padding: 30px;
+  }
+  .formContainer {
+    width: 80%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    padding: 40px;
+  }
+  .contentWrapper {
+    padding: 40px;
+  }
+  .formContainer {
+    width: 60%;
+  }
 }

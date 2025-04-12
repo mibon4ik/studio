@@ -4,13 +4,13 @@ import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Textarea} from '@/components/ui/textarea';
 import {useState} from 'react';
-import {useToast} from "@/hooks/use-toast";
+import {useToast} from '@/hooks/use-toast';
 import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
-import {cn} from "@/lib/utils";
+import {cn} from '@/lib/utils';
 import styles from './contacts.module.css';
-import {Mail} from "lucide-react";
+import {Mail} from 'lucide-react';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -78,7 +78,7 @@ export default function ContactPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.content}>
+      <div className={styles.contentWrapper}>
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
           Связаться <span className="text-primary">Со Мной</span>
         </h1>
@@ -92,9 +92,8 @@ export default function ContactPage() {
                 type="text"
                 placeholder="Ваше Имя"
                 className={cn(
-                  "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
-                  errors.name && "border-red-500",
-                  styles.input
+                  'rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full',
+                  errors.name && 'border-red-500'
                 )}
                 {...register('name')}
               />
@@ -107,9 +106,8 @@ export default function ContactPage() {
                 type="email"
                 placeholder="Ваш Email"
                 className={cn(
-                  "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
-                  errors.email && "border-red-500",
-                  styles.input
+                  'rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full',
+                  errors.email && 'border-red-500'
                 )}
                 {...register('email')}
               />
@@ -121,9 +119,8 @@ export default function ContactPage() {
               <Textarea
                 placeholder="Ваше Сообщение"
                 className={cn(
-                  "rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
-                  errors.message && "border-red-500",
-                  styles.textarea
+                  'rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full',
+                  errors.message && 'border-red-500'
                 )}
                 {...register('message')}
               />
@@ -134,10 +131,7 @@ export default function ContactPage() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className={cn(
-                "bg-primary text-primary-foreground rounded-full px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg w-full",
-                styles.button
-              )}
+              className="bg-primary text-primary-foreground rounded-full px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg w-full"
             >
               {isSubmitting ? 'Отправка...' : 'Отправить Сообщение'}
             </Button>
