@@ -9,8 +9,8 @@ import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {cn} from '@/lib/utils';
-import styles from './contacts.module.css';
 import {Mail} from 'lucide-react';
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -77,22 +77,25 @@ export default function ContactPage() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.contentWrapper}>
-        <h1 className={cn('text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in', styles.contactTitle)}>
-          Связаться <span className="text-primary">Со Мной</span>
-        </h1>
-        <div className={styles.formContainer}>
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+      <Card className="w-full max-w-md rounded-lg shadow-md border-0">
+        <CardHeader className="flex flex-col items-center space-y-1">
+          <CardTitle className="text-2xl font-bold tracking-tight">
+            Связаться <span className="text-primary">Со Мной</span>
+          </CardTitle>
+          <CardDescription>Отправьте ваше сообщение, и мы свяжемся с вами!</CardDescription>
+        </CardHeader>
+        <CardContent className="p-6">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4 animate-slide-in-bottom"
+            className="flex flex-col gap-4"
           >
             <div>
               <Input
                 type="text"
                 placeholder="Ваше Имя"
                 className={cn(
-                  'rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full',
+                  'rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full',
                   errors.name && 'border-red-500'
                 )}
                 {...register('name')}
@@ -106,7 +109,7 @@ export default function ContactPage() {
                 type="email"
                 placeholder="Ваш Email"
                 className={cn(
-                  'rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full',
+                  'rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full',
                   errors.email && 'border-red-500'
                 )}
                 {...register('email')}
@@ -131,13 +134,13 @@ export default function ContactPage() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-primary text-primary-foreground rounded-full px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg w-full"
+              className="bg-primary text-primary-foreground rounded-md px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg w-full"
             >
               {isSubmitting ? 'Отправка...' : 'Отправить Сообщение'}
             </Button>
           </form>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
