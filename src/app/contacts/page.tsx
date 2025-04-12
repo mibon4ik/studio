@@ -82,7 +82,7 @@ export default function ContactPage() {
       </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 w-full md:w-4/5 lg:w-1/2 animate-slide-in-bottom"
+        className="flex flex-col gap-4 w-full md:w-4/5 lg:w-1/2 xl:w-1/3 animate-slide-in-bottom"
       >
         <div>
           <Input
