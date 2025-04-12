@@ -63,6 +63,14 @@ body {
     @apply bg-background text-foreground;
     font-family: 'Roboto', sans-serif;
   }
+
+  .page-container {
+    @apply flex flex-col items-center justify-start min-h-screen p-4 md:p-8 lg:p-12;
+  }
+
+  .page-content {
+    @apply w-full max-w-3xl;
+  }
 }
 
 /* Animations */
