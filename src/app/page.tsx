@@ -4,6 +4,7 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/compo
 import {Button} from '@/components/ui/button';
 import Link from 'next/link';
 import React from 'react';
+import Image from 'next/image';
 
 const modulesData = [
   {
@@ -73,11 +74,13 @@ export default function Home() {
           <li>Узнаете о ключевых процессах и инструментах</li>
           <li>Подготовитесь к работе в логистической сфере</li>
         </ul>
-        <div className="mt-4">
-          <img
-            src="https://picsum.photos/600/400?random=1"
+        <div className="mt-4 rounded-md shadow-lg overflow-hidden">
+          <Image
+            src="https://images.pexels.com/photos/236077/pexels-photo-236077.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
             alt="Logistics Overview"
-            className="rounded-md shadow-lg"
+            width={1260}
+            height={750}
+            className="object-cover w-full h-64 md:h-80"
           />
           <p className="text-sm text-muted-foreground mt-2">Обзор логистических процессов.</p>
         </div>
@@ -94,10 +97,12 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-sm text-muted-foreground">{module.description}</CardDescription>
-                <img
+                <Image
                   src={`https://picsum.photos/400/200?random=${module.id}`}
                   alt={`Logistics ${module.title}`}
-                  className="mt-4 rounded-md shadow-sm"
+                  width={400}
+                  height={200}
+                  className="mt-4 rounded-md shadow-sm object-cover"
                 />
               </CardContent>
             </Card>
