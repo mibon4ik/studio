@@ -65,7 +65,7 @@ body {
   }
 
   .page-container {
-    @apply flex flex-col items-center justify-start min-h-screen p-4 md:p-8 lg:p-12;
+    @apply flex flex-col items-center justify-center min-h-screen p-4 md:p-8 lg:p-12;
   }
 
   .page-content {
@@ -101,3 +101,4 @@ body {
 .animate-slide-in-bottom {
   animation: slideInBottom 0.5s ease-out forwards;
 }
+
