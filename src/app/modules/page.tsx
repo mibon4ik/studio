@@ -7,6 +7,7 @@ import {useState, useEffect, useRef} from 'react';
 import React from 'react';
 import {useRouter} from 'next/navigation';
 import {useToast} from '@/hooks/use-toast';
+import {useModuleStore} from '@/store/moduleStore';
 
 const modulesData = [
   {
@@ -132,130 +133,12 @@ const modulesData = [
 ];
 
 export default function ModulesPage() {
-  const [modules, setModules] = useState(modulesData);
-  const [completedModules, setCompletedModules] = useState<number[]>([]);
+  const {completedModules, completeModule} = useModuleStore();
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const userId = 'user123'; // Replace with actual user ID
   const router = useRouter();
-  const {toast} = useToast();
-  const [backendReachable, setBackendReachable] = useState(false);
 
   useEffect(() => {
-    const checkBackend = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/');
-        setBackendReachable(response.ok);
-      } catch (error) {
-        setBackendReachable(false);
-        console.error('Backend не доступен:', error);
-      }
-    };
-
-    checkBackend();
-  }, []);
-
-  useEffect(() => {
-    const getCompletedModules = async () => {
-      if (!backendReachable) {
-        console.warn('Бекенд недоступен, пропуск получения завершенных модулей.');
-        toast({
-          title: "Ошибка",
-          description: "Бекенд недоступен. Невозможно получить завершенные модули.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      try {
-        const response = await fetch(`http://localhost:3001/completed/${userId}`);
-        if (response.ok) {
-          const data = await response.json();
-          setCompletedModules(data);
-          // Update module completion status based on fetched data
-          setModules(prevModules => {
-            return prevModules.map(module => ({
-              ...module,
-              isCompleted: data.includes(module.id)
-            }));
-          });
-        } else {
-          toast({
-            title: "Ошибка",
-            description: `Не удалось получить пройденные модули: ${response.status}`,
-            variant: "destructive",
-          });
-          console.error('Failed to fetch completed modules:', response.status);
-        }
-      } catch (error) {
-        toast({
-          title: "Ошибка",
-          description: `Ошибка при получении пройденных модулей: ${error}`,
-          variant: "destructive",
-        });
-        console.error('Error fetching completed modules:', error);
-      }
-    };
-
-    getCompletedModules();
-  }, [userId, toast, backendReachable]);
-
-  const isModuleAvailable = (moduleId: number) => {
-    const module = modules.find((m) => m.id === moduleId);
-    if (!module) return false;
-
-    if (module.prerequisites && module.prerequisites.length > 0) {
-      return module.prerequisites.every((prerequisiteId) =>
-        completedModules.includes(prerequisiteId)
-      );
-    }
-    return true;
-  };
-
-  const handleModuleComplete = async (moduleId: number) => {
-    if (!backendReachable) {
-      toast({
-        title: "Ошибка",
-        description: "Бекенд недоступен. Невозможно завершить модуль.",
-        variant: "destructive",
-      });
-      return;
-    }
-    try {
-      const response = await fetch(`http://localhost:3001/complete/${userId}/${moduleId}`, {
-        method: 'POST',
-      });
-
-      if (response.ok) {
-        toast({
-          title: "Успех",
-          description: `Модуль ${moduleId} успешно завершен!`,
-        });
-        setCompletedModules(prev => [...prev, moduleId]);
-        setModules(prevModules =>
-          prevModules.map(module =>
-            module.id === moduleId ? {...module, isCompleted: true} : module
-          )
-        );
-      } else {
-        toast({
-          title: "Ошибка",
-          description: `Не удалось завершить модуль: ${response.status}`,
-          variant: "destructive",
-        });
-        console.error('Failed to complete module:', response.status);
-      }
-    } catch (error) {
-      toast({
-        title: "Ошибка",
-        description: `Ошибка при завершении модуля: ${error}`,
-        variant: "destructive",
-      });
-      console.error('Error completing module:', error);
-    }
-  };
-
-  useEffect(() => {
-    cardRefs.current = cardRefs.current.slice(0, modules.length);
+    cardRefs.current = cardRefs.current.slice(0, modulesData.length);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -285,8 +168,20 @@ export default function ModulesPage() {
         }
       });
     };
-  }, [modules]);
+  }, []);
 
+
+  const isModuleAvailable = (moduleId: number) => {
+    const module = modulesData.find((m) => m.id === moduleId);
+    if (!module) return false;
+
+    if (module.prerequisites && module.prerequisites.length > 0) {
+      return module.prerequisites.every((prerequisiteId) =>
+        completedModules.includes(prerequisiteId)
+      );
+    }
+    return true;
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 lg:p-12">
@@ -294,7 +189,7 @@ export default function ModulesPage() {
         Изучите Наши <span className="text-primary">Модули</span>
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
-        {modules.map((module, index) => (
+        {modulesData.map((module, index) => (
           <div
             key={module.id}
             className={`rounded-lg shadow-md transition-all duration-300 hover:scale-105  ${

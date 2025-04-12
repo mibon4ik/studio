@@ -1,4 +1,3 @@
-
 'use client';
 
 import {Button} from '@/components/ui/button';
@@ -8,6 +7,8 @@ import {useRouter} from 'next/navigation';
 import {useState, useEffect} from 'react';
 import React from 'react';
 import {useParams} from 'next/navigation';
+import {useToast} from '@/hooks/use-toast';
+import {useModuleStore} from '@/store/moduleStore';
 
 const modulesData = [
   {
@@ -146,7 +147,9 @@ export default function ModulePage() {
   const [videoWatched, setVideoWatched] = useState(false);
   const [module, setModule] = useState(null);
   const [videoError, setVideoError] = useState(false);
+  const {toast} = useToast();
 
+  const {completeModule} = useModuleStore();
 
   useEffect(() => {
     const currentModule = modulesData.find(m => m.id === parseInt(moduleId as string));
@@ -180,10 +183,23 @@ export default function ModulePage() {
     }
   };
 
-  const handleVideoError = () => {
-    setVideoError(true);
+  const handleCompleteModule = () => {
+    completeModule(parseInt(moduleId as string));
+    toast({
+      title: 'Поздравляем!',
+      description: `Модуль ${moduleId} успешно завершен!`,
+    });
+    router.push('/modules');
   };
 
+  const handleVideoError = () => {
+    setVideoError(true);
+    toast({
+      title: 'Ошибка!',
+      description: 'Не удалось загрузить видео. Попробуйте позже.',
+      variant: 'destructive',
+    });
+  };
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen p-4 md:p-8 lg:p-12">
@@ -200,17 +216,17 @@ export default function ModulePage() {
           <CardContent>
             <div className="aspect-w-16 aspect-h-9">
               {videoError ? (
-                 <p>Не удалось загрузить видео.</p>
-                ) : (
-              <iframe
-                src={module.videoUrl}
-                title="Rick Roll Video"
-                allowFullScreen
-                onError={handleVideoError}
-                onEnded={() => setVideoWatched(true)}
-                crossOrigin="anonymous"
-              />
-                )}
+                <p>Не удалось загрузить видео.</p>
+              ) : (
+                <iframe
+                  src={module.videoUrl}
+                  title="Rick Roll Video"
+                  allowFullScreen
+                  onError={handleVideoError}
+                  onEnded={() => setVideoWatched(true)}
+                  crossOrigin="anonymous"
+                />
+              )}
             </div>
           </CardContent>
         </Card>
@@ -249,7 +265,13 @@ export default function ModulePage() {
               <div className="text-center">
                 <h3 className="text-xl font-semibold mb-4">Тест Завершен!</h3>
                 <p className="text-lg">Ваш Счет: {score} / {questions.length}</p>
-                <Button onClick={() => router.push('/modules')} className="transition-all duration-300">Обратно к Модулям</Button>
+                {videoWatched ? (
+                  <Button onClick={handleCompleteModule} className="transition-all duration-300">
+                    Перейти к следующему модулю
+                  </Button>
+                ) : (
+                  <p>Пожалуйста, сначала посмотрите видео.</p>
+                )}
               </div>
             )}
           </CardContent>
