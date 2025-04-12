@@ -9,6 +9,7 @@ import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {cn} from "@/lib/utils";
+import styles from './contacts.module.css';
 import {Mail} from "lucide-react";
 
 const formSchema = z.object({
@@ -76,8 +77,8 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 lg:p-12">
+    <div className={styles.container}>
+      <div className={styles.content}>
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
           Связаться <span className="text-primary">Со Мной</span>
         </h1>
