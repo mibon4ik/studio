@@ -9,7 +9,8 @@ import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {cn} from '@/lib/utils';
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
+import styles from './contacts.module.css';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -76,8 +77,8 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <Card className="w-full max-w-md rounded-lg shadow-md border-0">
+    <div className={styles.container}>
+      <Card className={styles.card}>
         <CardHeader className="flex flex-col items-center space-y-1">
           <CardTitle className="text-2xl font-bold tracking-tight">
             Связаться <span className="text-primary">Со Мной</span>
@@ -133,7 +134,7 @@ export default function ContactPage() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-primary text-primary-foreground rounded-md px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg w-full"
+              className="bg-primary text-primary-foreground rounded-full px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg w-full"
             >
               {isSubmitting ? 'Отправка...' : 'Отправить Сообщение'}
             </Button>
