@@ -265,13 +265,11 @@ export default function ModulePage() {
               <div className="text-center">
                 <h3 className="text-xl font-semibold mb-4">Тест Завершен!</h3>
                 <p className="text-lg">Ваш Счет: {score} / {questions.length}</p>
-                {videoWatched ? (
+                
                   <Button onClick={handleCompleteModule} className="transition-all duration-300">
                     Перейти к следующему модулю
                   </Button>
-                ) : (
-                  <p>Пожалуйста, сначала посмотрите видео.</p>
-                )}
+                
               </div>
             )}
           </CardContent>
@@ -280,3 +278,4 @@ export default function ModulePage() {
     </div>
   );
 }
+
