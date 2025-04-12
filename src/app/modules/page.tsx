@@ -63,10 +63,18 @@ export default function ModulesPage() {
       }
     );
 
-    cardRefs.current.forEach((card) => observer.observe(card));
+    cardRefs.current.forEach((card) => {
+      if (card) {
+        observer.observe(card);
+      }
+    });
 
     return () => {
-      cardRefs.current.forEach((card) => observer.unobserve(card));
+      cardRefs.current.forEach((card) => {
+        if (card instanceof Element) {
+          observer.unobserve(card);
+        }
+      });
     };
   }, []);
 
