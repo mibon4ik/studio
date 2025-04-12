@@ -82,14 +82,14 @@ export default function ContactPage() {
       </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 w-full md:w-4/5 lg:w-4/5 animate-slide-in-bottom"
+        className="flex flex-col gap-4 w-full md:w-4/5 lg:w-1/2 animate-slide-in-bottom"
       >
         <div>
           <Input
             type="text"
             placeholder="Ваше Имя"
             className={cn(
-              "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary",
+              "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
               errors.name && "border-red-500"
             )}
             {...register('name')}
@@ -103,7 +103,7 @@ export default function ContactPage() {
             type="email"
             placeholder="Ваш Email"
             className={cn(
-              "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary",
+              "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
               errors.email && "border-red-500"
             )}
             {...register('email')}
@@ -116,7 +116,7 @@ export default function ContactPage() {
           <Textarea
             placeholder="Ваше Сообщение"
             className={cn(
-              "rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary",
+              "rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
               errors.message && "border-red-500"
             )}
             {...register('message')}
@@ -128,7 +128,7 @@ export default function ContactPage() {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="bg-primary text-primary-foreground rounded-full px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          className="bg-primary text-primary-foreground rounded-full px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg w-full"
         >
           {isSubmitting ? 'Отправка...' : 'Отправить Сообщение'}
         </Button>
