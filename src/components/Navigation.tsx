@@ -33,6 +33,11 @@ export default function Navigation() {
             Словарь
           </Link>
         </li>
+        <li>
+          <Link href="/contacts" className="hover:text-primary transition-colors duration-300">
+            Контакты
+          </Link>
+        </li>
         {user ? (
           <li>
             <Button variant="outline" size="sm" onClick={handleLogout}>
@@ -50,4 +55,3 @@ export default function Navigation() {
     </nav>
   );
 }
-
