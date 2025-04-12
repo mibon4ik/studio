@@ -9,7 +9,6 @@ import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {cn} from '@/lib/utils';
-import {Mail} from 'lucide-react';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 
 const formSchema = z.object({
