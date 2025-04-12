@@ -4,62 +4,133 @@ import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Textarea} from '@/components/ui/textarea';
 import {useState} from 'react';
+import {useToast} from "@/hooks/use-toast";
+import {useForm} from 'react-hook-form';
+import {z} from 'zod';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {cn} from "@/lib/utils";
+import { Mail } from "lucide-react";
+
+const formSchema = z.object({
+  name: z.string().min(2, {
+    message: 'Имя должно содержать не менее 2 символов.',
+  }),
+  email: z.string().email({
+    message: 'Необходимо ввести корректный email.',
+  }),
+  message: z.string().min(10, {
+    message: 'Сообщение должно содержать не менее 10 символов.',
+  }),
+});
 
 export default function ContactPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const {toast} = useToast();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: {errors},
+  } = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      message: '',
+    },
+  });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!name || !email || !message) {
-      alert('Пожалуйста, заполните все поля.');
-      return;
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        toast({
+          title: 'Сообщение успешно отправлено!',
+          description: 'Мы свяжемся с вами в ближайшее время.',
+        });
+        reset();
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Ошибка отправки сообщения',
+          description: 'Пожалуйста, попробуйте еще раз позже.',
+        });
+      }
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Непредвиденная ошибка',
+        description: 'Произошла ошибка при отправке сообщения.',
+      });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    console.log('Отправка:', {name, email, message});
-
-    setName('');
-    setEmail('');
-    setMessage('');
-
-    alert('Сообщение успешно отправлено!');
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8 animate-fade-in">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 lg:p-12">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
         Связаться <span className="text-primary">Со Мной</span>
       </h1>
       <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-4 w-full md:w-1/2 animate-slide-in-bottom"
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-4 w-full md:w-2/3 lg:w-1/2 animate-slide-in-bottom"
       >
-        <Input
-          type="text"
-          placeholder="Ваше Имя"
-          className="rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <Input
-          type="email"
-          placeholder="Ваш Email"
-          className="rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Textarea
-          placeholder="Ваше Сообщение"
-          className="rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
+        <div>
+          <Input
+            type="text"
+            placeholder="Ваше Имя"
+            className={cn(
+              "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary",
+              errors.name && "border-red-500"
+            )}
+            {...register('name')}
+          />
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+          )}
+        </div>
+        <div>
+          <Input
+            type="email"
+            placeholder="Ваш Email"
+            className={cn(
+              "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary",
+              errors.email && "border-red-500"
+            )}
+            {...register('email')}
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+          )}
+        </div>
+        <div>
+          <Textarea
+            placeholder="Ваше Сообщение"
+            className={cn(
+              "rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary",
+              errors.message && "border-red-500"
+            )}
+            {...register('message')}
+          />
+          {errors.message && (
+            <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
+          )}
+        </div>
         <Button
           type="submit"
+          disabled={isSubmitting}
           className="bg-primary text-primary-foreground rounded-full px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
         >
-          Отправить Сообщение
+          {isSubmitting ? 'Отправка...' : 'Отправить Сообщение'}
         </Button>
       </form>
     </div>
