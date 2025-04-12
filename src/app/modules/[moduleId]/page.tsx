@@ -85,7 +85,7 @@ const quizQuestions = {
 };
 
 export default function ModulePage({params}: { params: { moduleId: string } }) {
-  const {moduleId} = React.use(Promise.resolve(params));
+  const {moduleId} = params;
   const router = useRouter();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -179,3 +179,4 @@ export default function ModulePage({params}: { params: { moduleId: string } }) {
     </div>
   );
 }
+
