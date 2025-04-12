@@ -7,7 +7,7 @@ import {useRouter} from 'next/navigation';
 import {useState, useEffect} from 'react';
 import React from 'react';
 
-const rickRollUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+const rickRollUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
 
 const quizQuestions = {
   1: [
@@ -86,10 +86,10 @@ const quizQuestions = {
 
 interface ModulePageProps {
   params: { moduleId: string };
-  onModuleComplete: (moduleId: number) => void;
+  searchParams: { moduleComplete?: (moduleId: number) => void };
 }
 
-export default function ModulePage({params, onModuleComplete}: ModulePageProps) {
+export default function ModulePage({params, searchParams}: ModulePageProps) {
   const {moduleId} = params;
   const router = useRouter();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -101,8 +101,10 @@ export default function ModulePage({params, onModuleComplete}: ModulePageProps) 
   const questions = quizQuestions[moduleId] || [];
   const currentQuestion = questions[currentQuestionIndex];
 
+  const onModuleComplete = searchParams?.moduleComplete;
+
   useEffect(() => {
-    if (videoWatched && quizCompleted) {
+    if (videoWatched && quizCompleted && onModuleComplete) {
       onModuleComplete(parseInt(moduleId));
     }
   }, [videoWatched, quizCompleted, moduleId, onModuleComplete]);

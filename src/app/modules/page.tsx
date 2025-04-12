@@ -3,7 +3,7 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {CheckCircle, Lock, LockOpen} from 'lucide-react';
 import Link from 'next/link';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import React from 'react';
 
 const modulesData = [
