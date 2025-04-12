@@ -8,6 +8,7 @@ import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {cn} from '@/lib/utils';
+import styles from './contacts.module.css';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -74,12 +75,12 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-8">
+    <div className={cn("flex flex-col items-center justify-center min-h-screen p-8", styles.container)}>
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8 animate-fade-in">
         Связаться <span className="text-primary">Со Мной</span>
       </h1>
 
-      <div className="w-full md:w-1/2 flex flex-col gap-4">
+      <div className={cn("w-full md:w-1/2 flex flex-col gap-4", styles.formContainer)}>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-4 animate-slide-in-bottom"
