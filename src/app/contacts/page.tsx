@@ -76,63 +76,65 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 lg:p-12">
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
-        Связаться <span className="text-primary">Со Мной</span>
-      </h1>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 w-full md:w-4/5 lg:w-1/2 xl:w-1/3 animate-slide-in-bottom"
-      >
-        <div>
-          <Input
-            type="text"
-            placeholder="Ваше Имя"
-            className={cn(
-              "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
-              errors.name && "border-red-500"
-            )}
-            {...register('name')}
-          />
-          {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-          )}
-        </div>
-        <div>
-          <Input
-            type="email"
-            placeholder="Ваш Email"
-            className={cn(
-              "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
-              errors.email && "border-red-500"
-            )}
-            {...register('email')}
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-          )}
-        </div>
-        <div>
-          <Textarea
-            placeholder="Ваше Сообщение"
-            className={cn(
-              "rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
-              errors.message && "border-red-500"
-            )}
-            {...register('message')}
-          />
-          {errors.message && (
-            <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
-          )}
-        </div>
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          className="bg-primary text-primary-foreground rounded-full px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg w-full"
+    <div className="flex justify-center">
+      <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 lg:p-12">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
+          Связаться <span className="text-primary">Со Мной</span>
+        </h1>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 w-full md:w-4/5 lg:w-1/2 xl:w-1/3 animate-slide-in-bottom"
         >
-          {isSubmitting ? 'Отправка...' : 'Отправить Сообщение'}
-        </Button>
-      </form>
+          <div>
+            <Input
+              type="text"
+              placeholder="Ваше Имя"
+              className={cn(
+                "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
+                errors.name && "border-red-500"
+              )}
+              {...register('name')}
+            />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+            )}
+          </div>
+          <div>
+            <Input
+              type="email"
+              placeholder="Ваш Email"
+              className={cn(
+                "rounded-full shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
+                errors.email && "border-red-500"
+              )}
+              {...register('email')}
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+            )}
+          </div>
+          <div>
+            <Textarea
+              placeholder="Ваше Сообщение"
+              className={cn(
+                "rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full",
+                errors.message && "border-red-500"
+              )}
+              {...register('message')}
+            />
+            {errors.message && (
+              <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
+            )}
+          </div>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="bg-primary text-primary-foreground rounded-full px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg w-full"
+          >
+            {isSubmitting ? 'Отправка...' : 'Отправить Сообщение'}
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }
