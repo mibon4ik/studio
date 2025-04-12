@@ -1,6 +1,5 @@
 'use client';
 
-import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Textarea} from '@/components/ui/textarea';
 import {useState} from 'react';
@@ -9,8 +8,6 @@ import {useForm} from 'react-hook-form';
 import {z} from 'zod';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {cn} from '@/lib/utils';
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
-import styles from './contacts.module.css';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -77,71 +74,66 @@ export default function ContactPage() {
   };
 
   return (
-    <div className={styles.container}>
-      <Card className={styles.card}>
-        <CardHeader className="flex flex-col items-center space-y-1">
-          <CardTitle className="text-2xl font-bold tracking-tight">
-            Связаться <span className="text-primary">Со Мной</span>
-          </CardTitle>
-          <CardDescription>Отправьте ваше сообщение, и мы свяжемся с вами!</CardDescription>
-        </CardHeader>
-        <CardContent className="p-6">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-4"
+    <div className="flex flex-col items-center justify-start min-h-screen p-8">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8 animate-fade-in">
+        Связаться <span className="text-primary">Со Мной</span>
+      </h1>
+
+      <div className="w-full md:w-1/2 flex flex-col gap-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 animate-slide-in-bottom"
+        >
+          <div>
+            <Input
+              type="text"
+              placeholder="Ваше Имя"
+              className={cn(
+                'rounded-full shadow-md transition-all duration-300 focus:ring-primary focus:border-primary w-full',
+                errors.name && 'border-red-500'
+              )}
+              {...register('name')}
+            />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+            )}
+          </div>
+          <div>
+            <Input
+              type="email"
+              placeholder="Ваш Email"
+              className={cn(
+                'rounded-full shadow-md transition-all duration-300 focus:ring-primary focus:border-primary w-full',
+                errors.email && 'border-red-500'
+              )}
+              {...register('email')}
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+            )}
+          </div>
+          <div>
+            <Textarea
+              placeholder="Ваше Сообщение"
+              className={cn(
+                'rounded-md shadow-md transition-all duration-300 focus:ring-primary focus:border-primary w-full',
+                errors.message && 'border-red-500'
+              )}
+              {...register('message')}
+            />
+            {errors.message && (
+              <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
+            )}
+          </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="bg-primary text-primary-foreground rounded-full px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg w-full"
           >
-            <div>
-              <Input
-                type="text"
-                placeholder="Ваше Имя"
-                className={cn(
-                  'rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full',
-                  errors.name && 'border-red-500'
-                )}
-                {...register('name')}
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-              )}
-            </div>
-            <div>
-              <Input
-                type="email"
-                placeholder="Ваш Email"
-                className={cn(
-                  'rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full',
-                  errors.email && 'border-red-500'
-                )}
-                {...register('email')}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-              )}
-            </div>
-            <div>
-              <Textarea
-                placeholder="Ваше Сообщение"
-                className={cn(
-                  'rounded-md shadow-sm transition-all duration-300 focus:ring-primary focus:border-primary w-full',
-                  errors.message && 'border-red-500'
-                )}
-                {...register('message')}
-              />
-              {errors.message && (
-                <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
-              )}
-            </div>
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="bg-primary text-primary-foreground rounded-full px-8 py-3 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg w-full"
-            >
-              {isSubmitting ? 'Отправка...' : 'Отправить Сообщение'}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+            {isSubmitting ? 'Отправка...' : 'Отправить Сообщение'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
-
