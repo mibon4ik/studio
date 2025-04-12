@@ -11,84 +11,93 @@ const modulesData = [
     id: 1,
     title: 'Введение в логистику',
     description: 'Понятие и цели логистики, роль логиста, направления и тренды.',
+    imageUrl: 'https://picsum.photos/400/200?random=1',
   },
   {
     id: 2,
     title: 'Складская логистика',
     description: 'Типы складов и их функции, принципы размещения товаров, FIFO, LIFO, ABC-анализ.',
+    imageUrl: 'https://picsum.photos/400/200?random=2',
   },
   {
     id: 3,
     title: 'Цепи поставок и логистические процессы',
     description: 'Участники цепи поставок, этапы движения товаров, Инкотермс.',
+    imageUrl: 'https://picsum.photos/400/200?random=3',
   },
   {
     id: 4,
     title: 'Транспортная логистика',
     description: 'Оптимизация транспортных маршрутов, выбор транспорта, документооборот.',
+    imageUrl: 'https://picsum.photos/400/200?random=4',
   },
   {
     id: 5,
     title: 'Виды и выбор транспорта',
     description: 'Классификация транспорта, критерии выбора оптимального вида транспорта.',
+    imageUrl: 'https://picsum.photos/400/200?random=5',
   },
   {
     id: 6,
     title: 'Словарь терминов',
     description: 'Основные термины и определения в логистике.',
+    imageUrl: 'https://picsum.photos/400/200?random=6',
   },
 ];
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-6 md:p-8 lg:p-12">
+    <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
       {/* Header */}
-      <header className="text-center mb-8 animate-fade-in">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary">
+      <header className="text-center mb-8 md:mb-12 lg:mb-16">
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary animate-fade-in">
           Основы логистики
         </h1>
-        <p className="text-muted-foreground text-lg md:text-xl lg:text-2xl mt-2">
+        <p className="text-muted-foreground text-base md:text-lg lg:text-xl mt-2 animate-fade-in">
           Курс для начинающих логистов
         </p>
       </header>
 
       {/* Start Learning Button */}
-      <Link href="/modules">
-        <Button className="bg-primary text-primary-foreground rounded-full px-6 py-3 md:px-8 md:py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg animate-slide-in-bottom mb-8">
-          Начать обучение
-        </Button>
-      </Link>
+      <div className="text-center mb-8 md:mb-12 lg:mb-16 animate-slide-in-bottom">
+        <Link href="/modules">
+          <Button className="rounded-full px-6 py-3 md:px-8 md:py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg">
+            Начать обучение
+          </Button>
+        </Link>
+      </div>
 
       {/* About the Course */}
-      <section className="mb-12 w-full max-w-3xl animate-slide-in-bottom">
-        <h2 className="text-3xl font-semibold tracking-tight mb-4">О курсе</h2>
-        <p className="text-muted-foreground text-base md:text-lg">
-          Этот курс предназначен для тех, кто начинает свой путь в логистике. Вы узнаете основные{' '}
-          <span className="font-semibold">понятия</span>, <span className="font-semibold">процессы</span> и{' '}
-          <span className="font-semibold">инструменты</span>, необходимые для успешной работы в этой области. Мы рассмотрим ключевые аспекты, такие как{' '}
-          <span className="font-semibold">складская логистика</span>, <span className="font-semibold">управление цепями поставок</span> и{' '}
-          <span className="font-semibold">транспортная логистика</span>.
-        </p>
-        <ul className="list-disc pl-5 mt-4 text-muted-foreground text-base md:text-lg">
-          <li>Получите базовые знания в логистике</li>
-          <li>Узнаете о ключевых процессах и инструментах</li>
-          <li>Подготовитесь к работе в логистической сфере</li>
-        </ul>
-        <div className="mt-4 rounded-md shadow-lg overflow-hidden">
-          <Image
-            src="https://images.pexels.com/photos/236077/pexels-photo-236077.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-            alt="Logistics Overview"
-            width={1260}
-            height={750}
-            className="object-cover w-full h-64 md:h-80"
-          />
-          <p className="text-sm text-muted-foreground mt-2">Обзор логистических процессов.</p>
+      <section className="mb-12 md:mb-16 lg:mb-20">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-4">О курсе</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <p className="text-muted-foreground text-base md:text-lg">
+              Этот курс предназначен для тех, кто начинает свой путь в логистике. Вы узнаете основные{' '}
+              <span className="font-semibold">понятия</span>, <span className="font-semibold">процессы</span> и{' '}
+              <span className="font-semibold">инструменты</span>, необходимые для успешной работы в этой области.
+            </p>
+            <ul className="list-disc pl-5 mt-4 text-muted-foreground text-base md:text-lg">
+              <li>Получите базовые знания в логистике</li>
+              <li>Узнаете о ключевых процессах и инструментах</li>
+              <li>Подготовитесь к работе в логистической сфере</li>
+            </ul>
+          </div>
+          <div>
+            <Image
+              src="https://images.pexels.com/photos/236077/pexels-photo-236077.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
+              alt="Logistics Overview"
+              width={600}
+              height={400}
+              className="object-cover w-full h-48 md:h-full rounded-md shadow-lg"
+            />
+          </div>
         </div>
       </section>
 
       {/* Course Modules */}
-      <section className="w-full max-w-6xl animate-slide-in-bottom">
-        <h2 className="text-3xl font-semibold tracking-tight mb-4">Модули курса</h2>
+      <section>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-4">Модули курса</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {modulesData.map((module) => (
             <Card key={module.id} className="rounded-lg shadow-md transition-all duration-300 hover:scale-105">
@@ -98,7 +107,7 @@ export default function Home() {
               <CardContent>
                 <CardDescription className="text-sm text-muted-foreground">{module.description}</CardDescription>
                 <Image
-                  src={`https://picsum.photos/400/200?random=${module.id}`}
+                  src={module.imageUrl}
                   alt={`Logistics ${module.title}`}
                   width={400}
                   height={200}
