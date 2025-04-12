@@ -32,14 +32,14 @@ export default function DictionaryPage() {
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen p-8">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8 animate-fade-in">
         Logistics <span className="text-primary">Glossary</span>
       </h1>
 
       <Input
         type="text"
         placeholder="Search for a term"
-        className="w-full md:w-1/2 mb-4 rounded-full shadow-md transition-all duration-300 focus:ring-primary focus:border-primary"
+        className="w-full md:w-1/2 mb-4 rounded-full shadow-md transition-all duration-300 focus:ring-primary focus:border-primary animate-slide-in-bottom"
         value={searchTerm}
         onChange={handleSearchChange}
       />
@@ -48,7 +48,7 @@ export default function DictionaryPage() {
         {terms.map((term) => (
           <div
             key={term.id}
-            className={`mb-2 p-4 rounded-md shadow-sm transition-all duration-300 animate-fade-in ${ // Added animate-fade-in
+            className={`mb-2 p-4 rounded-md shadow-sm transition-all duration-300 animate-fade-in ${
               highlightedTerm === term.id ? 'bg-accent' : 'bg-muted'
             }`}
           >

@@ -12,31 +12,28 @@ export default function ContactPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Basic validation
     if (!name || !email || !message) {
-      alert('Please fill in all fields.'); // Replace with a better error notification
+      alert('Please fill in all fields.');
       return;
     }
 
-    // Simulate form submission (replace with actual API call)
     console.log('Submitting:', {name, email, message});
 
-    // Reset form fields
     setName('');
     setEmail('');
     setMessage('');
 
-    alert('Message sent successfully!'); // Replace with a better success notification (e.g., using react-toast)
+    alert('Message sent successfully!');
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8 animate-fade-in">
         Get In <span className="text-primary">Touch</span>
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 w-full md:w-1/2"
+        className="flex flex-col gap-4 w-full md:w-1/2 animate-slide-in-bottom"
       >
         <Input
           type="text"

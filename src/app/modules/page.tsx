@@ -3,7 +3,7 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {CheckCircle, Lock, LockOpen} from 'lucide-react';
 import Link from 'next/link';
-import {useEffect, useRef, useState} from 'react';
+import {useState} from 'react';
 
 const modulesData = [
   {
@@ -104,40 +104,7 @@ const modulesData = [
 ];
 
 export default function ModulesPage() {
-  const cardRefs = useRef([]);
   const [modules, setModules] = useState(modulesData);
-
-  useEffect(() => {
-    cardRefs.current = cardRefs.current.slice(0, modules.length);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in', 'slide-in-bottom');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.2,
-      }
-    );
-
-    cardRefs.current.forEach((card) => {
-      if (card) {
-        observer.observe(card);
-      }
-    });
-
-    return () => {
-      cardRefs.current.forEach((card) => {
-        if (card) {
-          observer.unobserve(card);
-        }
-      });
-    };
-  }, [modules]);
 
   const isModuleAvailable = (moduleId: number) => {
     const module = modules.find((m) => m.id === moduleId);
@@ -153,16 +120,15 @@ export default function ModulesPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-8">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8 animate-fade-in">
         Explore Our <span className="text-primary">Modules</span>
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {modules.map((module, index) => (
+        {modules.map((module) => (
           <Card
             key={module.id}
-            ref={(el) => (cardRefs.current[index] = el)}
-            className={`rounded-lg shadow-md transition-all duration-300 hover:scale-105 animate-fade-in ${
-              !isModuleAvailable(module.id) ? 'opacity-50' : ''
+            className={`rounded-lg shadow-md transition-all duration-300 hover:scale-105 animate-slide-in-bottom ${
+              !isModuleAvailable(module.id) ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
             <CardHeader>
@@ -193,7 +159,12 @@ export default function ModulesPage() {
                   </li>
                 ))}
               </ul>
-              <Link href={isModuleAvailable(module.id) ? module.href : '#'} className="text-primary hover:underline">
+              <Link
+                href={isModuleAvailable(module.id) ? module.href : '#'}
+                className={`text-primary hover:underline ${
+                  !isModuleAvailable(module.id) ? 'text-gray-500 cursor-not-allowed' : ''
+                }`}
+              >
                 {isModuleAvailable(module.id) ? (
                   `Learn more about ${module.title}`
                 ) : (

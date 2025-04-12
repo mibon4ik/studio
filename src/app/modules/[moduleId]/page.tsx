@@ -114,65 +114,67 @@ export default function ModulePage({params}) {
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen p-8">
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8">
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mb-8 animate-fade-in">
         Module {moduleId} <span className="text-primary">Content</span>
       </h1>
 
-      <Card className="w-full md:w-2/3 lg:w-1/2">
-        <CardHeader>
-          <CardTitle>Video Lecture</CardTitle>
-          <CardDescription>Watch this video to learn more about the module.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="aspect-w-16 aspect-h-9">
-            <iframe
-              src={rickRollUrl}
-              title="Rick Roll Video"
-              allowFullScreen
-            />
-          </div>
-        </CardContent>
-      </Card>
+      <div className="w-full max-w-3xl">
+        <Card className="mb-8 animate-slide-in-bottom">
+          <CardHeader>
+            <CardTitle>Video Lecture</CardTitle>
+            <CardDescription>Watch this video to learn more about the module.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="aspect-w-16 aspect-h-9">
+              <iframe
+                src={rickRollUrl}
+                title="Rick Roll Video"
+                allowFullScreen
+              />
+            </div>
+          </CardContent>
+        </Card>
 
-      <Card className="w-full md:w-2/3 lg:w-1/2 mt-8">
-        <CardHeader>
-          <CardTitle>Mini-Test</CardTitle>
-          <CardDescription>Test your knowledge with this short quiz.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          {!quizCompleted ? (
-            <div>
-              <h2 className="text-lg font-semibold mb-4">{currentQuestion?.question}</h2>
-              <ul>
-                {currentQuestion?.options.map((option, index) => (
-                  <li key={index} className="mb-2">
-                    <label>
-                      <Input
-                        type="radio"
-                        name="answer"
-                        value={option}
-                        checked={selectedAnswer === option}
-                        onChange={() => handleAnswerSelect(option)}
-                        className="mr-2"
-                      />
-                      {option}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-              <Button onClick={handleNextQuestion} disabled={!selectedAnswer}>
-                {currentQuestionIndex === questions.length - 1 ? 'Finish Quiz' : 'Next Question'}
-              </Button>
-            </div>
-          ) : (
-            <div className="text-center">
-              <h3 className="text-xl font-semibold mb-4">Quiz Completed!</h3>
-              <p className="text-lg">Your Score: {score} / {questions.length}</p>
-              <Button onClick={() => router.push('/modules')}>Back to Modules</Button>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+        <Card className="animate-slide-in-bottom">
+          <CardHeader>
+            <CardTitle>Mini-Test</CardTitle>
+            <CardDescription>Test your knowledge with this short quiz.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            {!quizCompleted ? (
+              <div>
+                <h2 className="text-lg font-semibold mb-4">{currentQuestion?.question}</h2>
+                <ul>
+                  {currentQuestion?.options.map((option, index) => (
+                    <li key={index} className="mb-2">
+                      <label className="flex items-center">
+                        <Input
+                          type="radio"
+                          name="answer"
+                          value={option}
+                          checked={selectedAnswer === option}
+                          onChange={() => handleAnswerSelect(option)}
+                          className="mr-2"
+                        />
+                        {option}
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+                <Button onClick={handleNextQuestion} disabled={!selectedAnswer} className="transition-all duration-300">
+                  {currentQuestionIndex === questions.length - 1 ? 'Finish Quiz' : 'Next Question'}
+                </Button>
+              </div>
+            ) : (
+              <div className="text-center">
+                <h3 className="text-xl font-semibold mb-4">Quiz Completed!</h3>
+                <p className="text-lg">Your Score: {score} / {questions.length}</p>
+                <Button onClick={() => router.push('/modules')} className="transition-all duration-300">Back to Modules</Button>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
