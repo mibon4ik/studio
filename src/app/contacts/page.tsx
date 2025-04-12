@@ -79,7 +79,7 @@ export default function ContactPage() {
   return (
     <div className={styles.container}>
       <div className={styles.contentWrapper}>
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
+        <h1 className={cn('text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in', styles.contactTitle)}>
           Связаться <span className="text-primary">Со Мной</span>
         </h1>
         <div className={styles.formContainer}>
