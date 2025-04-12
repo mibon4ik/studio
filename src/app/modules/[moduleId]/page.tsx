@@ -4,7 +4,7 @@ import {Button} from '@/components/ui/button';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {Input} from '@/components/ui/input';
 import {useRouter} from 'next/navigation';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import React from 'react';
 
 const rickRollUrl = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
@@ -84,16 +84,28 @@ const quizQuestions = {
   ],
 };
 
-export default function ModulePage({params}: { params: { moduleId: string } }) {
+interface ModulePageProps {
+  params: { moduleId: string };
+  onModuleComplete: (moduleId: number) => void;
+}
+
+export default function ModulePage({params, onModuleComplete}: ModulePageProps) {
   const {moduleId} = params;
   const router = useRouter();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [score, setScore] = useState(0);
+  const [videoWatched, setVideoWatched] = useState(false);
 
   const questions = quizQuestions[moduleId] || [];
   const currentQuestion = questions[currentQuestionIndex];
+
+  useEffect(() => {
+    if (videoWatched && quizCompleted) {
+      onModuleComplete(parseInt(moduleId));
+    }
+  }, [videoWatched, quizCompleted, moduleId, onModuleComplete]);
 
   const handleAnswerSelect = (answer) => {
     setSelectedAnswer(answer);
@@ -131,6 +143,7 @@ export default function ModulePage({params}: { params: { moduleId: string } }) {
                 src={rickRollUrl}
                 title="Rick Roll Video"
                 allowFullScreen
+                onEnded={() => setVideoWatched(true)}
               />
             </div>
           </CardContent>

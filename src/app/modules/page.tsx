@@ -4,6 +4,7 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/compo
 import {CheckCircle, Lock, LockOpen} from 'lucide-react';
 import Link from 'next/link';
 import {useState} from 'react';
+import React from 'react';
 
 const modulesData = [
   {
@@ -118,6 +119,15 @@ export default function ModulesPage() {
     return true;
   };
 
+  const handleModuleComplete = (moduleId: number) => {
+    setModules(prevModules =>
+      prevModules.map(module =>
+        module.id === moduleId ? {...module, isCompleted: true} : module
+      )
+    );
+  };
+
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 lg:p-12">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
@@ -166,7 +176,19 @@ export default function ModulesPage() {
                 }`}
               >
                 {isModuleAvailable(module.id) ? (
-                  `Узнать больше о ${module.title}`
+                  <Link
+                    href={{
+                      pathname: `/modules/${module.id}`,
+                      query: {moduleComplete: handleModuleComplete.bind(null, module.id)},
+                    }}
+                    onClick={(e) => {
+                      if (!isModuleAvailable(module.id)) {
+                        e.preventDefault();
+                      }
+                    }}
+                  >
+                  Узнать больше о {module.title}
+                  </Link>
                 ) : (
                   <span className="text-gray-500">Заблокировано. Завершите предыдущие модули.</span>
                 )}
