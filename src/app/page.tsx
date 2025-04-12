@@ -83,13 +83,13 @@ export default function Home() {
               <li>Подготовитесь к работе в логистической сфере</li>
             </ul>
           </div>
-          <div>
+          <div className="flex justify-center">
             <Image
               src="https://images.pexels.com/photos/236077/pexels-photo-236077.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
               alt="Logistics Overview"
-              width={600}
-              height={400}
-              className="object-cover w-full h-48 md:h-full rounded-md shadow-lg"
+              width={400}
+              height={300}
+              className="object-cover rounded-md shadow-lg"
             />
           </div>
         </div>
