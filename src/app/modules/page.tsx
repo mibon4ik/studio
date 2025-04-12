@@ -6,6 +6,7 @@ import Link from 'next/link';
 import {useState, useEffect, useRef} from 'react';
 import React from 'react';
 import {useRouter} from 'next/navigation';
+import {useToast} from '@/hooks/use-toast';
 
 const modulesData = [
   {
@@ -136,6 +137,7 @@ export default function ModulesPage() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const userId = 'user123'; // Replace with actual user ID
   const router = useRouter();
+    const {toast} = useToast();
 
   useEffect(() => {
     const getCompletedModules = async () => {
@@ -152,15 +154,25 @@ export default function ModulesPage() {
             }));
           });
         } else {
+            toast({
+                title: "Ошибка",
+                description: `Не удалось получить пройденные модули: ${response.status}`,
+                variant: "destructive",
+            });
           console.error('Failed to fetch completed modules:', response.status);
         }
       } catch (error) {
+          toast({
+              title: "Ошибка",
+              description: `Ошибка при получении пройденных модулей: ${error}`,
+              variant: "destructive",
+          });
         console.error('Error fetching completed modules:', error);
       }
     };
 
     getCompletedModules();
-  }, [userId]);
+  }, [userId, toast]);
 
   const isModuleAvailable = (moduleId: number) => {
     const module = modules.find((m) => m.id === moduleId);
@@ -181,6 +193,10 @@ export default function ModulesPage() {
       });
 
       if (response.ok) {
+          toast({
+              title: "Успех",
+              description: `Модуль ${moduleId} успешно завершен!`,
+          });
         setCompletedModules(prev => [...prev, moduleId]);
         setModules(prevModules =>
           prevModules.map(module =>
@@ -188,9 +204,19 @@ export default function ModulesPage() {
           )
         );
       } else {
+          toast({
+              title: "Ошибка",
+              description: `Не удалось завершить модуль: ${response.status}`,
+              variant: "destructive",
+          });
         console.error('Failed to complete module:', response.status);
       }
     } catch (error) {
+        toast({
+            title: "Ошибка",
+            description: `Ошибка при завершении модуля: ${error}`,
+            variant: "destructive",
+        });
       console.error('Error completing module:', error);
     }
   };
@@ -288,4 +314,3 @@ export default function ModulesPage() {
     </div>
   );
 }
-
