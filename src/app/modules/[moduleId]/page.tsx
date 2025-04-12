@@ -6,6 +6,7 @@ import {Input} from '@/components/ui/input';
 import {useRouter} from 'next/navigation';
 import {useState, useEffect} from 'react';
 import React from 'react';
+import {useParams} from 'next/navigation';
 
 const modulesData = [
   {
@@ -134,8 +135,8 @@ interface ModulePageProps {
   params: { moduleId: string };
 }
 
-export default function ModulePage({params}: ModulePageProps) {
-  const {moduleId} = params;
+export default function ModulePage() {
+  const {moduleId} = useParams();
   const router = useRouter();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -147,7 +148,7 @@ export default function ModulePage({params}: ModulePageProps) {
 
 
   useEffect(() => {
-    const currentModule = modulesData.find(m => m.id === parseInt(moduleId));
+    const currentModule = modulesData.find(m => m.id === parseInt(moduleId as string));
     if (currentModule) {
       setModule(currentModule);
     }
