@@ -1,6 +1,7 @@
 'use client';
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
+import Link from 'next/link';
 import {useEffect, useRef} from 'react';
 
 const modules = [
@@ -8,31 +9,37 @@ const modules = [
     id: 1,
     title: 'Introduction to Logistics',
     description: 'Understand the basics of logistics and its importance.',
+    href: '/modules/1', // Example href
   },
   {
     id: 2,
     title: 'Warehouse Logistics',
     description: 'Learn about warehouse management and optimization.',
+    href: '/modules/2',
   },
   {
     id: 3,
     title: 'Transportation Logistics',
     description: 'Explore the world of transportation and delivery systems.',
+    href: '/modules/3',
   },
   {
     id: 4,
     title: 'Supply Chains',
     description: 'Dive into the complexities of supply chain management.',
+    href: '/modules/4',
   },
   {
     id: 5,
     title: 'Practice and Case Studies',
     description: 'Real-world examples and case studies in logistics.',
+    href: '/modules/5',
   },
   {
     id: 6,
     title: 'Glossary of Terms',
     description: 'A comprehensive glossary of logistics terms.',
+    href: '/dictionary',
   },
 ];
 
@@ -46,7 +53,7 @@ export default function ModulesPage() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in', 'slide-in-bottom');
+            entry.target.classList.add('animate-fade-in', 'slide-in-bottom'); // Ensure these classes are in your CSS
             observer.unobserve(entry.target);
           }
         });
@@ -73,14 +80,16 @@ export default function ModulesPage() {
           <Card
             key={module.id}
             ref={(el) => (cardRefs.current[index] = el)}
-            className="rounded-lg shadow-md transition-all duration-300 hover:scale-105"
+            className="rounded-lg shadow-md transition-all duration-300 hover:scale-105 animate-fade-in" // Added animate-fade-in
           >
             <CardHeader>
               <CardTitle>{module.title}</CardTitle>
               <CardDescription>{module.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <p>Learn more about {module.title}</p>
+              <Link href={module.href} className="text-primary hover:underline">
+                Learn more about {module.title}
+              </Link>
             </CardContent>
           </Card>
         ))}
@@ -88,4 +97,3 @@ export default function ModulesPage() {
     </div>
   );
 }
-

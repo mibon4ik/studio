@@ -10,14 +10,23 @@ export default function ContactPage() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle form submission here
-    console.log('Name:', name, 'Email:', email, 'Message:', message);
+    // Basic validation
+    if (!name || !email || !message) {
+      alert('Please fill in all fields.'); // Replace with a better error notification
+      return;
+    }
+
+    // Simulate form submission (replace with actual API call)
+    console.log('Submitting:', {name, email, message});
+
     // Reset form fields
     setName('');
     setEmail('');
     setMessage('');
+
+    alert('Message sent successfully!'); // Replace with a better success notification (e.g., using react-toast)
   };
 
   return (
@@ -59,4 +68,3 @@ export default function ContactPage() {
     </div>
   );
 }
-

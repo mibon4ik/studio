@@ -48,7 +48,7 @@ export default function DictionaryPage() {
         {terms.map((term) => (
           <div
             key={term.id}
-            className={`mb-2 p-4 rounded-md shadow-sm transition-all duration-300 ${
+            className={`mb-2 p-4 rounded-md shadow-sm transition-all duration-300 animate-fade-in ${ // Added animate-fade-in
               highlightedTerm === term.id ? 'bg-accent' : 'bg-muted'
             }`}
           >
@@ -60,4 +60,3 @@ export default function DictionaryPage() {
     </div>
   );
 }
-
