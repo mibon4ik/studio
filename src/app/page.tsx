@@ -68,9 +68,9 @@ export default function Home() {
 
       {/* About the Course */}
       <section className="mb-12 md:mb-16 lg:mb-20">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-4">О курсе</h2>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-4 text-center">О курсе</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-          <div className="md:pl-8">
+          <div className="md:pl-8 text-center md:text-left">
             <p className="text-muted-foreground text-base md:text-lg">
               Этот курс предназначен для тех, кто начинает свой путь в логистике. Вы узнаете основные{' '}
               <span className="font-semibold">понятия</span>, <span className="font-semibold">процессы</span> и{' '}
@@ -96,7 +96,7 @@ export default function Home() {
 
       {/* Course Modules */}
       <section>
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-4">Модули курса</h2>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-4 text-center">Модули курса</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {modulesData.map((module) => (
             <Card key={module.id} className="rounded-lg shadow-md transition-all duration-300 hover:scale-105">
