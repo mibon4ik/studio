@@ -4,7 +4,7 @@ import {Button} from '@/components/ui/button';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import React from 'react';
-import {useAuth} from "@/hooks/use-auth";
+import {useAuth} from '@/hooks/use-auth';
 
 export default function Navigation() {
   const {user, logout} = useAuth();
@@ -17,7 +17,7 @@ export default function Navigation() {
 
   return (
     <nav className="bg-secondary text-secondary-foreground p-4">
-      <ul className="flex justify-center space-x-6 md:space-x-8 lg:space-x-10 relative left-0 right-0 mx-auto">
+      <ul className="flex justify-center space-x-6 md:space-x-8 lg:space-x-10">
         <li>
           <Link href="/" className="hover:text-primary transition-colors duration-300">
             Главная
@@ -55,4 +55,3 @@ export default function Navigation() {
     </nav>
   );
 }
-
