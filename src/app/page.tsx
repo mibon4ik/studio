@@ -11,39 +11,38 @@ const modulesData = [
     id: 1,
     title: 'Введение в логистику',
     description: 'Понятие и цели логистики, роль логиста, направления и тренды.',
-    imageUrl: 'https://picsum.photos/400/200?random=1',
   },
   {
     id: 2,
     title: 'Складская логистика',
     description: 'Типы складов и их функции, принципы размещения товаров, FIFO, LIFO, ABC-анализ.',
-    imageUrl: 'https://picsum.photos/400/200?random=2',
   },
   {
     id: 3,
     title: 'Цепи поставок и логистические процессы',
     description: 'Участники цепи поставок, этапы движения товаров, Инкотермс.',
-    imageUrl: 'https://picsum.photos/400/200?random=3',
   },
   {
     id: 4,
     title: 'Транспортная логистика',
     description: 'Оптимизация транспортных маршрутов, выбор транспорта, документооборот.',
-    imageUrl: 'https://picsum.photos/400/200?random=4',
   },
   {
     id: 5,
     title: 'Виды и выбор транспорта',
     description: 'Классификация транспорта, критерии выбора оптимального вида транспорта.',
-    imageUrl: 'https://picsum.photos/400/200?random=5',
   },
   {
     id: 6,
     title: 'Словарь терминов',
     description: 'Основные термины и определения в логистике.',
-    imageUrl: 'https://picsum.photos/400/200?random=6',
   },
 ];
+
+const generateImageUrl = (title: string) => {
+  const encodedTitle = encodeURIComponent(title);
+  return `https://picsum.photos/400/200?text=${encodedTitle} Logistics`;
+};
 
 export default function Home() {
   return (
@@ -107,7 +106,7 @@ export default function Home() {
               <CardContent>
                 <CardDescription className="text-sm text-muted-foreground">{module.description}</CardDescription>
                 <Image
-                  src={module.imageUrl}
+                  src={generateImageUrl(module.title)}
                   alt={`Logistics ${module.title}`}
                   width={400}
                   height={200}
