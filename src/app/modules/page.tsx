@@ -3,7 +3,7 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import {CheckCircle, Lock, LockOpen} from 'lucide-react';
 import Link from 'next/link';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import React from 'react';
 
 const modulesData = [
@@ -11,19 +11,19 @@ const modulesData = [
     id: 1,
     title: 'Введение в логистику',
     description: 'Понятие и цели логистики, роль логиста, направления и тренды.',
-    whatYoullLearn: [
-      'Понятие и цели логистики',
-      'Роль логиста в компании',
-      'Направления логистики',
-      'Современные тренды (логистика 4.0)',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое логистика?',
+        options: ['Искусство войны', 'Процесс планирования и выполнения эффективной транспортировки и хранения товаров', 'Вид танца', 'Раздел медицины'],
+        correctAnswer: 'Процесс планирования и выполнения эффективной транспортировки и хранения товаров',
+      },
+      {
+        question: 'Какова роль логиста?',
+        options: ['Делать кофе', 'Управлять потоком товаров и информации', 'Проектировать здания', 'Писать романы'],
+        correctAnswer: 'Управлять потоком товаров и информации',
+      },
     ],
-    includes: [
-      '📺 Включает видео-лекцию',
-      '📝 PDF-лекция и презентация',
-      '🧠 Мини-тест (5 вопросов)',
-      '📁 Скачать шаблоны (организационная схема логистики)',
-    ],
-    href: '/modules/1',
     isCompleted: false,
     prerequisites: [],
   },
@@ -31,14 +31,19 @@ const modulesData = [
     id: 2,
     title: 'Цепи поставок (Supply Chain)',
     description: 'Участники цепи поставок, этапы движения товаров, Инкотермс.',
-    whatYoullLearn: [
-      'Участники цепи поставок',
-      'Этапы движения товаров',
-      'Инкотермс (условия поставки)',
-      'Планирование логистических операций',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое цепь поставок?',
+        options: ['Металлическая цепь для поставок', 'Сеть между компанией и ее поставщиками для производства и распространения конкретного продукта', 'Способ приготовления пищи', 'Государственное регулирование'],
+        correctAnswer: 'Сеть между компанией и ее поставщиками для производства и распространения конкретного продукта',
+      },
+      {
+        question: 'Что такое Инкотермс?',
+        options: ['Вид насекомого', 'Международные коммерческие условия, определяющие обязанности продавцов и покупателей при доставке товаров', 'Марка чернил', 'Стиль дизайна интерьера'],
+        correctAnswer: 'Международные коммерческие условия, определяющие обязанности продавцов и покупателей при доставке товаров',
+      },
     ],
-    includes: ['📺 Видеоурок с инфографикой', '📝 Лекция + практическая задача', '🧠 Тест (10 вопросов)'],
-    href: '/modules/2',
     isCompleted: false,
     prerequisites: [1],
   },
@@ -46,14 +51,19 @@ const modulesData = [
     id: 3,
     title: 'Складская логистика',
     description: 'Типы складов, принципы размещения, FIFO, LIFO, ABC-анализ.',
-    whatYoullLearn: [
-      'Типы складов и их функции',
-      'Принципы размещения товаров',
-      'FIFO, LIFO, ABC-анализ',
-      'WMS-системы',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое складская логистика?',
+        options: ['Изучение облаков', 'Управление хранением и обработкой товаров на складе', 'Вид музыки', 'Процесс приготовления хлеба'],
+        correctAnswer: 'Управление хранением и обработкой товаров на складе',
+      },
+      {
+        question: 'Что такое FIFO?',
+        options: ['Вид корма для собак', 'Первый пришел, первый ушел - метод оценки запасов', 'Вид птицы', 'Марка автомобиля'],
+        correctAnswer: 'Первый пришел, первый ушел - метод оценки запасов',
+      },
     ],
-    includes: ['📺 Демонстрация интерфейса WMS', '📁 Скачать чек-лист приёмки товара'],
-    href: '/modules/3',
     isCompleted: false,
     prerequisites: [2],
   },
@@ -61,14 +71,19 @@ const modulesData = [
     id: 4,
     title: 'Транспортная логистика',
     description: 'Оптимизация транспортных маршрутов, выбор транспорта, документооборот.',
-    whatYoullLearn: [
-      'Выбор видов транспорта',
-      'Оптимизация маршрутов',
-      'Оформление транспортных документов',
-      'Страхование грузов',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое транспортная логистика?',
+        options: ['Изучение древних культур', 'Оптимизация транспортировки товаров', 'Вид спорта', 'Искусство живописи'],
+        correctAnswer: 'Оптимизация транспортировки товаров',
+      },
+      {
+        question: 'Какова основная цель транспортной логистики?',
+        options: ['Потратить как можно больше времени', 'Перемещать товары эффективно и экономично', 'Создавать пробки', 'Загрязнять окружающую среду'],
+        correctAnswer: 'Перемещать товары эффективно и экономично',
+      },
     ],
-    includes: ['📝 Лекция с примерами расчетов', '📁 Шаблоны документов', '🌐 Вебинар с экспертом'],
-    href: '/modules/4',
     isCompleted: false,
     prerequisites: [3],
   },
@@ -76,14 +91,19 @@ const modulesData = [
     id: 5,
     title: 'Управление запасами',
     description: 'Методы прогнозирования спроса, определение оптимального уровня запасов.',
-    whatYoullLearn: [
-      'Прогнозирование спроса',
-      'Оптимизация запасов',
-      'Методы контроля',
-      'Снижение издержек',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое управление запасами?',
+        options: ['Процесс подсчета звезд', 'Методы и техники для эффективного управления уровнями запасов', 'Вид танца', 'Процесс приготовления сыра'],
+        correctAnswer: 'Методы и техники для эффективного управления уровнями запасов',
+      },
+      {
+        question: 'Что такое прогнозирование спроса?',
+        options: ['Предсказание погоды', 'Оценка будущего спроса клиентов', 'Вид фокуса', 'Процесс приготовления вина'],
+        correctAnswer: 'Оценка будущего спроса клиентов',
+      },
     ],
-    includes: ['📊 Интерактивные графики', '📝 Практикум с кейсами', '📚 Дополнительные материалы'],
-    href: '/modules/5',
     isCompleted: false,
     prerequisites: [4],
   },
@@ -91,14 +111,19 @@ const modulesData = [
     id: 6,
     title: 'Международная логистика',
     description: 'Особенности ВЭД, таможенное оформление, международные перевозки.',
-    whatYoullLearn: [
-      'Особенности ВЭД',
-      'Таможенное оформление',
-      'Международные перевозки',
-      'Валютный контроль',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое международная логистика?',
+        options: ['Изучение языков', 'Управление потоком товаров через международные границы', 'Вид спорта', 'Искусство скульптуры'],
+        correctAnswer: 'Управление потоком товаров через международные границы',
+      },
+      {
+        question: 'Что такое таможенное оформление?',
+        options: ['Вид зубной пасты', 'Процесс соблюдения правил импорта/экспорта', 'Марка автомобиля', 'Стиль музыки'],
+        correctAnswer: 'Процесс соблюдения правил импорта/экспорта',
+      },
     ],
-    includes: ['🌐 Онлайн-курс', '📝 Глоссарий терминов', '💼 Примеры из практики'],
-    href: '/modules/6',
     isCompleted: false,
     prerequisites: [5],
   },
@@ -106,6 +131,8 @@ const modulesData = [
 
 export default function ModulesPage() {
   const [modules, setModules] = useState(modulesData);
+  const [completedModules, setCompletedModules] = useState<number[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const isModuleAvailable = (moduleId: number) => {
     const module = modules.find((m) => m.id === moduleId);
@@ -113,19 +140,53 @@ export default function ModulesPage() {
 
     if (module.prerequisites && module.prerequisites.length > 0) {
       return module.prerequisites.every((prerequisiteId) =>
-        modules.find((m) => m.id === prerequisiteId)?.isCompleted
+        completedModules.includes(prerequisiteId)
       );
     }
     return true;
   };
 
   const handleModuleComplete = (moduleId: number) => {
+    setCompletedModules(prev => [...prev, moduleId]);
     setModules(prevModules =>
       prevModules.map(module =>
         module.id === moduleId ? {...module, isCompleted: true} : module
       )
     );
   };
+
+  useEffect(() => {
+    cardRefs.current = cardRefs.current.slice(0, modules.length);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-in-bottom');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        rootMargin: '0px',
+        threshold: 0.1,
+      }
+    );
+
+    cardRefs.current.forEach((card) => {
+      if (card) {
+        observer.observe(card);
+      }
+    });
+
+    return () => {
+      cardRefs.current.forEach((card) => {
+        if (card) {
+        observer.unobserve(card);
+        }
+      });
+    };
+  }, [modules]);
 
 
   return (
@@ -134,69 +195,55 @@ export default function ModulesPage() {
         Изучите Наши <span className="text-primary">Модули</span>
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
-        {modules.map((module) => (
-          <Card
+        {modules.map((module, index) => (
+          <div
             key={module.id}
-            className={`rounded-lg shadow-md transition-all duration-300 hover:scale-105 animate-slide-in-bottom ${
+            className={`rounded-lg shadow-md transition-all duration-300 hover:scale-105  ${
               !isModuleAvailable(module.id) ? 'opacity-50 cursor-not-allowed' : ''
             }`}
+            ref={(el) => (cardRefs.current[index] = el)}
           >
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between text-lg">
-                {module.title}
-                {module.isCompleted ? (
-                  <CheckCircle className="h-5 w-5 text-green-500" />
-                ) : isModuleAvailable(module.id) ? (
-                  <LockOpen className="h-4 w-4 text-gray-500" />
-                ) : (
-                  <Lock className="h-4 w-4 text-gray-400" />
-                )}
-              </CardTitle>
-              <CardDescription className="text-sm">{module.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ul>
-                {module.whatYoullLearn.map((item, i) => (
-                  <li key={i} className="text-sm text-muted-foreground">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <ul className="mt-4">
-                {module.includes.map((item, i) => (
-                  <li key={i} className="text-xs">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href={isModuleAvailable(module.id) ? module.href : '#'}
-                className={`text-primary hover:underline ${
-                  !isModuleAvailable(module.id) ? 'text-gray-500 cursor-not-allowed' : ''
-                }`}
-              >
+            <Card className="h-full">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between text-lg">
+                  {module.title}
+                  {completedModules.includes(module.id) ? (
+                    <CheckCircle className="h-5 w-5 text-green-500" />
+                  ) : isModuleAvailable(module.id) ? (
+                    <LockOpen className="h-4 w-4 text-gray-500" />
+                  ) : (
+                    <Lock className="h-4 w-4 text-gray-400" />
+                  )}
+                </CardTitle>
+                <CardDescription className="text-sm">{module.description}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex flex-col justify-between">
+                <div>
+                  <ul className="mb-4">
+                    {module.quizQuestions.map((item, i) => (
+                      <li key={i} className="text-sm text-muted-foreground">
+                        {item.question}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
                 {isModuleAvailable(module.id) ? (
                   <Link
-                    href={{
-                      pathname: `/modules/${module.id}`,
-                      query: {moduleComplete: handleModuleComplete.bind(null, module.id)},
-                    }}
-                    onClick={(e) => {
-                      if (!isModuleAvailable(module.id)) {
-                        e.preventDefault();
-                      }
-                    }}
+                  href={`/modules/${module.id}`}
+                    className="text-primary hover:underline"
                   >
-                  Узнать больше о {module.title}
+                    Перейти к модулю
                   </Link>
                 ) : (
                   <span className="text-gray-500">Заблокировано. Завершите предыдущие модули.</span>
                 )}
-              </Link>
-            </CardContent>
-          </Card>
+              </div>
+              </CardContent>
+            </Card>
+          </div>
         ))}
       </div>
     </div>
   );
-  }
+}

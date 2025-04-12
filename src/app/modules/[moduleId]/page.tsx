@@ -7,89 +7,134 @@ import {useRouter} from 'next/navigation';
 import {useState, useEffect} from 'react';
 import React from 'react';
 
-const rickRollUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ';
-
-const quizQuestions = {
-  1: [
-    {
-      question: 'Что такое логистика?',
-      options: ['Искусство войны', 'Процесс планирования и выполнения эффективной транспортировки и хранения товаров', 'Вид танца', 'Раздел медицины'],
-      correctAnswer: 'Процесс планирования и выполнения эффективной транспортировки и хранения товаров',
-    },
-    {
-      question: 'Какова роль логиста?',
-      options: ['Делать кофе', 'Управлять потоком товаров и информации', 'Проектировать здания', 'Писать романы'],
-      correctAnswer: 'Управлять потоком товаров и информации',
-    },
-  ],
-  2: [
-    {
-      question: 'Что такое цепь поставок?',
-      options: ['Металлическая цепь для поставок', 'Сеть между компанией и ее поставщиками для производства и распространения конкретного продукта', 'Способ приготовления пищи', 'Государственное регулирование'],
-      correctAnswer: 'Сеть между компанией и ее поставщиками для производства и распространения конкретного продукта',
-    },
-    {
-      question: 'Что такое Инкотермс?',
-      options: ['Вид насекомого', 'Международные коммерческие условия, определяющие обязанности продавцов и покупателей при доставке товаров', 'Марка чернил', 'Стиль дизайна интерьера'],
-      correctAnswer: 'Международные коммерческие условия, определяющие обязанности продавцов и покупателей при доставке товаров',
-    },
-  ],
-  3: [
-    {
-      question: 'Что такое складская логистика?',
-      options: ['Изучение облаков', 'Управление хранением и обработкой товаров на складе', 'Вид музыки', 'Процесс приготовления хлеба'],
-      correctAnswer: 'Управление хранением и обработкой товаров на складе',
-    },
-    {
-      question: 'Что такое FIFO?',
-      options: ['Вид корма для собак', 'Первый пришел, первый ушел - метод оценки запасов', 'Вид птицы', 'Марка автомобиля'],
-      correctAnswer: 'Первый пришел, первый ушел - метод оценки запасов',
-    },
-  ],
-  4: [
-    {
-      question: 'Что такое транспортная логистика?',
-      options: ['Изучение древних культур', 'Оптимизация транспортировки товаров', 'Вид спорта', 'Искусство живописи'],
-      correctAnswer: 'Оптимизация транспортировки товаров',
-    },
-    {
-      question: 'Какова основная цель транспортной логистики?',
-      options: ['Потратить как можно больше времени', 'Перемещать товары эффективно и экономично', 'Создавать пробки', 'Загрязнять окружающую среду'],
-      correctAnswer: 'Перемещать товары эффективно и экономично',
-    },
-  ],
-  5: [
-    {
-      question: 'Что такое управление запасами?',
-      options: ['Процесс подсчета звезд', 'Методы и техники для эффективного управления уровнями запасов', 'Вид танца', 'Процесс приготовления сыра'],
-      correctAnswer: 'Методы и техники для эффективного управления уровнями запасов',
-    },
-    {
-      question: 'Что такое прогнозирование спроса?',
-      options: ['Предсказание погоды', 'Оценка будущего спроса клиентов', 'Вид фокуса', 'Процесс приготовления вина'],
-      correctAnswer: 'Оценка будущего спроса клиентов',
-    },
-  ],
-  6: [
-    {
-      question: 'Что такое международная логистика?',
-      options: ['Изучение языков', 'Управление потоком товаров через международные границы', 'Вид спорта', 'Искусство скульптуры'],
-      correctAnswer: 'Управление потоком товаров через международные границы',
-    },
-    {
-      question: 'Что такое таможенное оформление?',
-      options: ['Вид зубной пасты', 'Процесс соблюдения правил импорта/экспорта', 'Марка автомобиля', 'Стиль музыки'],
-      correctAnswer: 'Процесс соблюдения правил импорта/экспорта',
-    },
-  ],
-};
+const modulesData = [
+  {
+    id: 1,
+    title: 'Введение в логистику',
+    description: 'Понятие и цели логистики, роль логиста, направления и тренды.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое логистика?',
+        options: ['Искусство войны', 'Процесс планирования и выполнения эффективной транспортировки и хранения товаров', 'Вид танца', 'Раздел медицины'],
+        correctAnswer: 'Процесс планирования и выполнения эффективной транспортировки и хранения товаров',
+      },
+      {
+        question: 'Какова роль логиста?',
+        options: ['Делать кофе', 'Управлять потоком товаров и информации', 'Проектировать здания', 'Писать романы'],
+        correctAnswer: 'Управлять потоком товаров и информации',
+      },
+    ],
+    isCompleted: false,
+    prerequisites: [],
+  },
+  {
+    id: 2,
+    title: 'Цепи поставок (Supply Chain)',
+    description: 'Участники цепи поставок, этапы движения товаров, Инкотермс.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое цепь поставок?',
+        options: ['Металлическая цепь для поставок', 'Сеть между компанией и ее поставщиками для производства и распространения конкретного продукта', 'Способ приготовления пищи', 'Государственное регулирование'],
+        correctAnswer: 'Сеть между компанией и ее поставщиками для производства и распространения конкретного продукта',
+      },
+      {
+        question: 'Что такое Инкотермс?',
+        options: ['Вид насекомого', 'Международные коммерческие условия, определяющие обязанности продавцов и покупателей при доставке товаров', 'Марка чернил', 'Стиль дизайна интерьера'],
+        correctAnswer: 'Международные коммерческие условия, определяющие обязанности продавцов и покупателей при доставке товаров',
+      },
+    ],
+    isCompleted: false,
+    prerequisites: [1],
+  },
+  {
+    id: 3,
+    title: 'Складская логистика',
+    description: 'Типы складов, принципы размещения, FIFO, LIFO, ABC-анализ.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое складская логистика?',
+        options: ['Изучение облаков', 'Управление хранением и обработкой товаров на складе', 'Вид музыки', 'Процесс приготовления хлеба'],
+        correctAnswer: 'Управление хранением и обработкой товаров на складе',
+      },
+      {
+        question: 'Что такое FIFO?',
+        options: ['Вид корма для собак', 'Первый пришел, первый ушел - метод оценки запасов', 'Вид птицы', 'Марка автомобиля'],
+        correctAnswer: 'Первый пришел, первый ушел - метод оценки запасов',
+      },
+    ],
+    isCompleted: false,
+    prerequisites: [2],
+  },
+  {
+    id: 4,
+    title: 'Транспортная логистика',
+    description: 'Оптимизация транспортных маршрутов, выбор транспорта, документооборот.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое транспортная логистика?',
+        options: ['Изучение древних культур', 'Оптимизация транспортировки товаров', 'Вид спорта', 'Искусство живописи'],
+        correctAnswer: 'Оптимизация транспортировки товаров',
+      },
+      {
+        question: 'Какова основная цель транспортной логистики?',
+        options: ['Потратить как можно больше времени', 'Перемещать товары эффективно и экономично', 'Создавать пробки', 'Загрязнять окружающую среду'],
+        correctAnswer: 'Перемещать товары эффективно и экономично',
+      },
+    ],
+    isCompleted: false,
+    prerequisites: [3],
+  },
+  {
+    id: 5,
+    title: 'Управление запасами',
+    description: 'Методы прогнозирования спроса, определение оптимального уровня запасов.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое управление запасами?',
+        options: ['Процесс подсчета звезд', 'Методы и техники для эффективного управления уровнями запасов', 'Вид танца', 'Процесс приготовления сыра'],
+        correctAnswer: 'Методы и техники для эффективного управления уровнями запасов',
+      },
+      {
+        question: 'Что такое прогнозирование спроса?',
+        options: ['Предсказание погоды', 'Оценка будущего спроса клиентов', 'Вид фокуса', 'Процесс приготовления вина'],
+        correctAnswer: 'Оценка будущего спроса клиентов',
+      },
+    ],
+    isCompleted: false,
+    prerequisites: [4],
+  },
+  {
+    id: 6,
+    title: 'Международная логистика',
+    description: 'Особенности ВЭД, таможенное оформление, международные перевозки.',
+    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    quizQuestions: [
+      {
+        question: 'Что такое международная логистика?',
+        options: ['Изучение языков', 'Управление потоком товаров через международные границы', 'Вид спорта', 'Искусство скульптуры'],
+        correctAnswer: 'Управление потоком товаров через международные границы',
+      },
+      {
+        question: 'Что такое таможенное оформление?',
+        options: ['Вид зубной пасты', 'Процесс соблюдения правил импорта/экспорта', 'Марка автомобиля', 'Стиль музыки'],
+        correctAnswer: 'Процесс соблюдения правил импорта/экспорта',
+      },
+    ],
+    isCompleted: false,
+    prerequisites: [5],
+  },
+];
 
 interface ModulePageProps {
   params: { moduleId: string };
-  searchParams: { moduleComplete?: (moduleId: number) => void };
 }
 
-export default function ModulePage({params, searchParams}: ModulePageProps) {
+export default function ModulePage({params}: ModulePageProps) {
   const {moduleId} = params;
   const router = useRouter();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -97,17 +142,23 @@ export default function ModulePage({params, searchParams}: ModulePageProps) {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [score, setScore] = useState(0);
   const [videoWatched, setVideoWatched] = useState(false);
+  const [module, setModule] = useState(null);
+  const [videoError, setVideoError] = useState(false);
 
-  const questions = quizQuestions[moduleId] || [];
-  const currentQuestion = questions[currentQuestionIndex];
-
-  const onModuleComplete = searchParams?.moduleComplete;
 
   useEffect(() => {
-    if (videoWatched && quizCompleted && onModuleComplete) {
-      onModuleComplete(parseInt(moduleId));
+    const currentModule = modulesData.find(m => m.id === parseInt(moduleId));
+    if (currentModule) {
+      setModule(currentModule);
     }
-  }, [videoWatched, quizCompleted, moduleId, onModuleComplete]);
+  }, [moduleId]);
+
+  if (!module) {
+    return <div>Модуль не найден.</div>;
+  }
+
+  const questions = module.quizQuestions || [];
+  const currentQuestion = questions[currentQuestionIndex];
 
   const handleAnswerSelect = (answer) => {
     setSelectedAnswer(answer);
@@ -127,6 +178,11 @@ export default function ModulePage({params, searchParams}: ModulePageProps) {
     }
   };
 
+  const handleVideoError = () => {
+    setVideoError(true);
+  };
+
+
   return (
     <div className="flex flex-col items-center justify-start min-h-screen p-4 md:p-8 lg:p-12">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
@@ -141,12 +197,18 @@ export default function ModulePage({params, searchParams}: ModulePageProps) {
           </CardHeader>
           <CardContent>
             <div className="aspect-w-16 aspect-h-9">
+              {videoError ? (
+                 <p>Не удалось загрузить видео.</p>
+                ) : (
               <iframe
-                src={rickRollUrl}
+                src={module.videoUrl}
                 title="Rick Roll Video"
                 allowFullScreen
+                onError={handleVideoError}
                 onEnded={() => setVideoWatched(true)}
+                crossOrigin="anonymous"
               />
+                )}
             </div>
           </CardContent>
         </Card>
