@@ -191,6 +191,10 @@ export default function ModulesPage() {
     return true;
   };
 
+  const handleModuleComplete = (moduleId: number) => {
+    completeModule(moduleId);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 lg:p-12">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
