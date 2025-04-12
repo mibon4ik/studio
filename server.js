@@ -30,6 +30,10 @@ app.post('/complete/:userId/:moduleId', (req, res) => {
   res.status(200).send('Module completed successfully');
 });
 
+app.get('/', (req, res) => {
+  res.status(200).send('Backend is running');
+});
+
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });

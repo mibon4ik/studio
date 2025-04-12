@@ -137,10 +137,35 @@ export default function ModulesPage() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const userId = 'user123'; // Replace with actual user ID
   const router = useRouter();
-    const {toast} = useToast();
+  const {toast} = useToast();
+  const [backendReachable, setBackendReachable] = useState(false);
+
+  useEffect(() => {
+    const checkBackend = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/');
+        setBackendReachable(response.ok);
+      } catch (error) {
+        setBackendReachable(false);
+        console.error('Backend не доступен:', error);
+      }
+    };
+
+    checkBackend();
+  }, []);
 
   useEffect(() => {
     const getCompletedModules = async () => {
+      if (!backendReachable) {
+        console.warn('Бекенд недоступен, пропуск получения завершенных модулей.');
+        toast({
+          title: "Ошибка",
+          description: "Бекенд недоступен. Невозможно получить завершенные модули.",
+          variant: "destructive",
+        });
+        return;
+      }
+
       try {
         const response = await fetch(`http://localhost:3001/completed/${userId}`);
         if (response.ok) {
@@ -154,25 +179,25 @@ export default function ModulesPage() {
             }));
           });
         } else {
-            toast({
-                title: "Ошибка",
-                description: `Не удалось получить пройденные модули: ${response.status}`,
-                variant: "destructive",
-            });
+          toast({
+            title: "Ошибка",
+            description: `Не удалось получить пройденные модули: ${response.status}`,
+            variant: "destructive",
+          });
           console.error('Failed to fetch completed modules:', response.status);
         }
       } catch (error) {
-          toast({
-              title: "Ошибка",
-              description: `Ошибка при получении пройденных модулей: ${error}`,
-              variant: "destructive",
-          });
+        toast({
+          title: "Ошибка",
+          description: `Ошибка при получении пройденных модулей: ${error}`,
+          variant: "destructive",
+        });
         console.error('Error fetching completed modules:', error);
       }
     };
 
     getCompletedModules();
-  }, [userId, toast]);
+  }, [userId, toast, backendReachable]);
 
   const isModuleAvailable = (moduleId: number) => {
     const module = modules.find((m) => m.id === moduleId);
@@ -187,16 +212,24 @@ export default function ModulesPage() {
   };
 
   const handleModuleComplete = async (moduleId: number) => {
+    if (!backendReachable) {
+      toast({
+        title: "Ошибка",
+        description: "Бекенд недоступен. Невозможно завершить модуль.",
+        variant: "destructive",
+      });
+      return;
+    }
     try {
       const response = await fetch(`http://localhost:3001/complete/${userId}/${moduleId}`, {
         method: 'POST',
       });
 
       if (response.ok) {
-          toast({
-              title: "Успех",
-              description: `Модуль ${moduleId} успешно завершен!`,
-          });
+        toast({
+          title: "Успех",
+          description: `Модуль ${moduleId} успешно завершен!`,
+        });
         setCompletedModules(prev => [...prev, moduleId]);
         setModules(prevModules =>
           prevModules.map(module =>
@@ -204,23 +237,22 @@ export default function ModulesPage() {
           )
         );
       } else {
-          toast({
-              title: "Ошибка",
-              description: `Не удалось завершить модуль: ${response.status}`,
-              variant: "destructive",
-          });
+        toast({
+          title: "Ошибка",
+          description: `Не удалось завершить модуль: ${response.status}`,
+          variant: "destructive",
+        });
         console.error('Failed to complete module:', response.status);
       }
     } catch (error) {
-        toast({
-            title: "Ошибка",
-            description: `Ошибка при завершении модуля: ${error}`,
-            variant: "destructive",
-        });
+      toast({
+        title: "Ошибка",
+        description: `Ошибка при завершении модуля: ${error}`,
+        variant: "destructive",
+      });
       console.error('Error completing module:', error);
     }
   };
-
 
   useEffect(() => {
     cardRefs.current = cardRefs.current.slice(0, modules.length);
