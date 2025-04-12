@@ -40,8 +40,8 @@ const modulesData = [
 ];
 
 const generateImageUrl = (title: string) => {
-  const encodedTitle = encodeURIComponent(title);
-  return `https://picsum.photos/400/200?text=${encodedTitle} Logistics`;
+  const encodedTitle = encodeURIComponent(`Logistics ${title}`);
+  return `https://source.unsplash.com/400x200/?${encodedTitle}`;
 };
 
 export default function Home() {
@@ -69,8 +69,8 @@ export default function Home() {
       {/* About the Course */}
       <section className="mb-12 md:mb-16 lg:mb-20">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight mb-4">О курсе</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <div className="md:pl-8">
             <p className="text-muted-foreground text-base md:text-lg">
               Этот курс предназначен для тех, кто начинает свой путь в логистике. Вы узнаете основные{' '}
               <span className="font-semibold">понятия</span>, <span className="font-semibold">процессы</span> и{' '}
