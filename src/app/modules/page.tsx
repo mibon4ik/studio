@@ -1,4 +1,3 @@
-
 'use client';
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
@@ -6,6 +5,7 @@ import {CheckCircle, Lock, LockOpen} from 'lucide-react';
 import Link from 'next/link';
 import {useState, useEffect, useRef} from 'react';
 import React from 'react';
+import {useRouter} from 'next/navigation';
 
 const modulesData = [
   {
@@ -135,31 +135,32 @@ export default function ModulesPage() {
   const [completedModules, setCompletedModules] = useState<number[]>([]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const userId = 'user123'; // Replace with actual user ID
+  const router = useRouter();
 
-    useEffect(() => {
-        const getCompletedModules = async () => {
-            try {
-                const response = await fetch(`http://localhost:3001/completed/${userId}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setCompletedModules(data);
-                    // Update module completion status based on fetched data
-                    setModules(prevModules => {
-                        return prevModules.map(module => ({
-                            ...module,
-                            isCompleted: data.includes(module.id)
-                        }));
-                    });
-                } else {
-                    console.error('Failed to fetch completed modules:', response.status);
-                }
-            } catch (error) {
-                console.error('Error fetching completed modules:', error);
-            }
-        };
+  useEffect(() => {
+    const getCompletedModules = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/completed/${userId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setCompletedModules(data);
+          // Update module completion status based on fetched data
+          setModules(prevModules => {
+            return prevModules.map(module => ({
+              ...module,
+              isCompleted: data.includes(module.id)
+            }));
+          });
+        } else {
+          console.error('Failed to fetch completed modules:', response.status);
+        }
+      } catch (error) {
+        console.error('Error fetching completed modules:', error);
+      }
+    };
 
-        getCompletedModules();
-    }, [userId]);
+    getCompletedModules();
+  }, [userId]);
 
   const isModuleAvailable = (moduleId: number) => {
     const module = modules.find((m) => m.id === moduleId);
@@ -174,24 +175,24 @@ export default function ModulesPage() {
   };
 
   const handleModuleComplete = async (moduleId: number) => {
-      try {
-          const response = await fetch(`http://localhost:3001/complete/${userId}/${moduleId}`, {
-              method: 'POST',
-          });
+    try {
+      const response = await fetch(`http://localhost:3001/complete/${userId}/${moduleId}`, {
+        method: 'POST',
+      });
 
-          if (response.ok) {
-              setCompletedModules(prev => [...prev, moduleId]);
-              setModules(prevModules =>
-                  prevModules.map(module =>
-                      module.id === moduleId ? {...module, isCompleted: true} : module
-                  )
-              );
-          } else {
-              console.error('Failed to complete module:', response.status);
-          }
-      } catch (error) {
-          console.error('Error completing module:', error);
+      if (response.ok) {
+        setCompletedModules(prev => [...prev, moduleId]);
+        setModules(prevModules =>
+          prevModules.map(module =>
+            module.id === moduleId ? {...module, isCompleted: true} : module
+          )
+        );
+      } else {
+        console.error('Failed to complete module:', response.status);
       }
+    } catch (error) {
+      console.error('Error completing module:', error);
+    }
   };
 
 
@@ -222,7 +223,7 @@ export default function ModulesPage() {
     return () => {
       cardRefs.current.forEach((card) => {
         if (card) {
-        observer.unobserve(card);
+          observer.unobserve(card);
         }
       });
     };
@@ -268,18 +269,17 @@ export default function ModulesPage() {
                   </ul>
                 </div>
                 <div>
-                {isModuleAvailable(module.id) ? (
-                  <Link
-                    href={`/modules/${module.id}`}
-                    onClick={() => handleModuleComplete(module.id)}
-                    className="text-primary hover:underline"
-                  >
-                    Перейти к модулю
-                  </Link>
-                ) : (
-                  <span className="text-gray-500">Заблокировано. Завершите предыдущие модули.</span>
-                )}
-              </div>
+                  {isModuleAvailable(module.id) ? (
+                    <Link
+                      href={`/modules/${module.id}`}
+                      className="text-primary hover:underline"
+                    >
+                      Перейти к модулю
+                    </Link>
+                  ) : (
+                    <span className="text-gray-500">Заблокировано. Завершите предыдущие модули.</span>
+                  )}
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -288,3 +288,4 @@ export default function ModulesPage() {
     </div>
   );
 }
+
