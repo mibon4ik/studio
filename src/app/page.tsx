@@ -73,6 +73,14 @@ export default function Home() {
           <li>Узнаете о ключевых процессах и инструментах</li>
           <li>Подготовитесь к работе в логистической сфере</li>
         </ul>
+        <div className="mt-4">
+          <img
+            src="https://picsum.photos/600/400?random=1"
+            alt="Logistics Overview"
+            className="rounded-md shadow-lg"
+          />
+          <p className="text-sm text-muted-foreground mt-2">Обзор логистических процессов.</p>
+        </div>
       </section>
 
       {/* Course Modules */}
@@ -86,6 +94,11 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-sm text-muted-foreground">{module.description}</CardDescription>
+                <img
+                  src={`https://picsum.photos/400/200?random=${module.id}`}
+                  alt={`Logistics ${module.title}`}
+                  className="mt-4 rounded-md shadow-sm"
+                />
               </CardContent>
             </Card>
           ))}
@@ -94,4 +107,3 @@ export default function Home() {
     </div>
   );
 }
-
