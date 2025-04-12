@@ -17,7 +17,7 @@ export default function Navigation() {
 
   return (
     <nav className="bg-secondary text-secondary-foreground p-4">
-      <ul className="flex justify-center space-x-6 md:space-x-8 lg:space-x-10">
+      <ul className="grid grid-cols-1fr justify-items-center gap-6 md:grid-cols-1fr md:space-x-8 lg:grid-cols-1fr lg:space-x-10">
         <li>
           <Link href="/" className="hover:text-primary transition-colors duration-300">
             Главная
