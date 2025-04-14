@@ -40,7 +40,10 @@ const modulesData = [
 ];
 
 const generateImageUrl = (title: string) => {
-  const encodedTitle = encodeURIComponent(`Logistics ${title}`);
+  const keywords = ['warehouse', 'truck', 'supply chain', 'delivery', 'transport'];
+  const randomIndex = Math.floor(Math.random() * keywords.length);
+  const keyword = keywords[randomIndex];
+  const encodedTitle = encodeURIComponent(`Logistics ${keyword} ${title}`);
   return `https://source.unsplash.com/400x200/?${encodedTitle}`;
 };
 
@@ -120,3 +123,4 @@ export default function Home() {
     </div>
   );
 }
+
