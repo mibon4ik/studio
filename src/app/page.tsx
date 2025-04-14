@@ -36,7 +36,7 @@ const modulesData = [
     id: 5,
     title: 'Виды и выбор транспорта',
     description: 'Классификация транспорта, критерии выбора оптимального вида транспорта.',
-    imageUrl: 'https://avatars.mds.yandex.net/i?id=16553bee601cec42b7bac69b48d96cf3_l-5287893-images-thumbs&n=13',
+    imageUrl: 'https://i.imgur.com/white_background_logistics.png',
   },
   {
     id: 6,
@@ -128,3 +128,4 @@ export default function Home() {
     </div>
   );
 }
+

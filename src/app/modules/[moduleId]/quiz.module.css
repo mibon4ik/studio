@@ -32,13 +32,51 @@
   font-size: 1.1rem;
   cursor: pointer;
   color: var(--foreground);
-  padding-left: 1rem;
-  text-align: left; /* Align text to the left */
+  padding: 0.5rem;
+  transition: background-color 0.3s ease;
+  width: 100%;
 }
 
-.optionInput {
+.optionInput {  
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: 2px solid #ccc;
   cursor: pointer;
-  margin-right: 0.5rem; /* Add some space between the radio button and the text */
+  position: relative;
+  margin-right: 0.7rem;
+  outline: none; 
+  transition: background-color 0.2s ease;
+
+  &:checked {
+    border-color: blue;
+  }
+  &:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background-color: blue;
+  }
+  
+  &:checked + .optionLabel {
+    background-color: rgba(128, 128, 128, 0.3);
+  }
+  
+  &:not(:checked) + .optionLabel {
+    background-color: transparent;
+  }
+}
+
+
+.optionInput:focus {
+  box-shadow: 0 0 0 2px rgba(0, 0, 255, 0.5);
 }
 
 .nextButton {
