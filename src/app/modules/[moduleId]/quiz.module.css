@@ -1,0 +1,84 @@
+.quizCard {
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: slideInBottom 0.5s ease-out forwards;
+}
+
+.quizContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.questionTitle {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 1.3rem;
+  color: var(--foreground);
+}
+
+.optionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.optionItem {
+  margin-bottom: 1rem;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--foreground);
+}
+
+.optionInput {
+  margin-right: 0.7rem;
+  cursor: pointer;
+}
+
+.nextButton {
+  margin-top: 2rem;
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Style for quiz complete state */
+.quizComplete {
+  text-align: center;
+}
+
+.completeButton {
+  margin-top: 2rem;
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
