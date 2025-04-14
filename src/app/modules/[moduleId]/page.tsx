@@ -18,7 +18,7 @@ const modulesData = [
     id: 1,
     title: 'Введение в логистику',
     description: 'Понятие и цели логистики, роль логиста, направления и тренды.',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/embed/wtlM-pAMWAA?si=SZvN4VjNzeO40rlz',
     quizQuestions: [
       {
         question: 'Что такое логистика?',
@@ -38,7 +38,7 @@ const modulesData = [
     id: 2,
     title: 'Цепи поставок (Supply Chain)',
     description: 'Участники цепи поставок, этапы движения товаров, Инкотермс.',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/embed/wtlM-pAMWAA?si=SZvN4VjNzeO40rlz',
     quizQuestions: [
       {
         question: 'Что такое цепь поставок?',
@@ -58,7 +58,7 @@ const modulesData = [
     id: 3,
     title: 'Складская логистика',
     description: 'Типы складов и их функции, принципы размещения товаров, FIFO, LIFO, ABC-анализ.',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/embed/wtlM-pAMWAA?si=SZvN4VjNzeO40rlz',
     quizQuestions: [
       {
         question: 'Что такое складская логистика?',
@@ -78,7 +78,7 @@ const modulesData = [
     id: 4,
     title: 'Транспортная логистика',
     description: 'Оптимизация транспортных маршрутов, выбор транспорта, документооборот.',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/embed/wtlM-pAMWAA?si=SZvN4VjNzeO40rlz',
     quizQuestions: [
       {
         question: 'Что такое транспортная логистика?',
@@ -98,7 +98,7 @@ const modulesData = [
     id: 5,
     title: 'Управление запасами',
     description: 'Методы прогнозирования спроса, определение оптимального уровня запасов.',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/embed/wtlM-pAMWAA?si=SZvN4VjNzeO40rlz',
     quizQuestions: [
       {
         question: 'Что такое управление запасами?',
@@ -118,7 +118,7 @@ const modulesData = [
     id: 6,
     title: 'Международная логистика',
     description: 'Особенности ВЭД, таможенное оформление, международные перевозки.',
-    videoUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    videoUrl: 'https://www.youtube.com/embed/wtlM-pAMWAA?si=SZvN4VjNzeO40rlz',
     quizQuestions: [
       {
         question: 'Что такое международная логистика?',
@@ -144,7 +144,6 @@ export default function ModulePage() {
   const {moduleId} = useParams();
   const router = useRouter();
   const [module, setModule] = useState(null);
-  const [videoError, setVideoError] = useState(false);
   const {toast} = useToast();
   const {user} = useAuth();
 
@@ -176,15 +175,6 @@ export default function ModulePage() {
     router.push('/modules');
   };
 
-  const handleVideoError = () => {
-    setVideoError(true);
-    toast({
-      title: 'Ошибка!',
-      description: 'Не удалось загрузить видео. Попробуйте позже.',
-      variant: 'destructive',
-    });
-  };
-
   return (
     <div className={styles.moduleContainer}>
       <h1 className={styles.moduleTitle}>
@@ -199,17 +189,12 @@ export default function ModulePage() {
           </CardHeader>
           <CardContent>
             <div className={styles.videoContainer}>
-              {videoError ? (
-                <p>Не удалось загрузить видео.</p>
-              ) : (
-                <iframe
-                  src={module.videoUrl}
-                  title="Rick Roll Video"
-                  allowFullScreen
-                  onError={handleVideoError}
-                  className={styles.videoFrame}
-                />
-              )}
+              <iframe
+                src={module.videoUrl}
+                title="YouTube video"
+                allowFullScreen
+                className={styles.videoFrame}
+              />
             </div>
           </CardContent>
         </Card>
