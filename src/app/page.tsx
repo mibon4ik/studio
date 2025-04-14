@@ -12,57 +12,41 @@ const modulesData = [
     id: 1,
     title: 'Введение в логистику',
     description: 'Понятие и цели логистики, роль логиста, направления и тренды.',
+    imageUrl: 'https://www.logisticsbusiness.com/wp-content/uploads/2016/12/Key-Visual_Logistics40.jpg',
   },
   {
     id: 2,
     title: 'Складская логистика',
     description: 'Типы складов и их функции, принципы размещения товаров, FIFO, LIFO, ABC-анализ.',
+    imageUrl: 'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5af22330341893.561e7ed3091b8.jpg',
   },
   {
     id: 3,
     title: 'Цепи поставок и логистические процессы',
     description: 'Участники цепи поставок, этапы движения товаров, Инкотермс.',
+    imageUrl: 'https://static.tildacdn.com/tild6561-3331-4535-b436-363633656634/image.png',
   },
   {
     id: 4,
     title: 'Транспортная логистика',
     description: 'Оптимизация транспортных маршрутов, выбор транспорта, документооборот.',
+    imageUrl: 'https://img-s2.onedio.com/id-6308c49e0e80e868195e6591/rev-0/w-1200/h-800/f-jpg/s-9376bd038a464455c62a382e6aa09d77651ddcd5.jpg',
   },
   {
     id: 5,
     title: 'Виды и выбор транспорта',
     description: 'Классификация транспорта, критерии выбора оптимального вида транспорта.',
+    imageUrl: 'https://avatars.mds.yandex.net/i?id=16553bee601cec42b7bac69b48d96cf3_l-5287893-images-thumbs&n=13',
   },
   {
     id: 6,
     title: 'Словарь терминов',
     description: 'Основные термины и определения в логистике.',
+    imageUrl: 'https://cdn.vectorstock.com/i/500p/23/12/transportation-and-logistics-concept-isometric-3d-vector-41182312.jpg',
   },
 ];
 
-const generateImageUrl = (title: string) => {
-  const keywords = ['warehouse', 'truck', 'supply chain', 'delivery', 'transport'];
-  const randomIndex = Math.floor(Math.random() * keywords.length);
-  const keyword = keywords[randomIndex];
-  const encodedTitle = encodeURIComponent(`Logistics ${keyword} ${title}`);
-  return `https://source.unsplash.com/400x200/?${encodedTitle}`;
-};
-
 export default function Home() {
-  const [imageUrls, setImageUrls] = useState({});
-
-  useEffect(() => {
-    const generateAllImageUrls = () => {
-      const urls = {};
-      modulesData.forEach((module) => {
-        urls[module.id] = generateImageUrl(module.title);
-      });
-      setImageUrls(urls);
-    };
-
-    generateAllImageUrls();
-  }, []);
-
   return (
     <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
       {/* Header */}
@@ -109,6 +93,8 @@ export default function Home() {
               className="object-cover rounded-md shadow-lg about-image"
               priority={true}
               style={{borderRadius: '12px'}}
+              loader={({src, width, quality}) => `${src}&w=${width}&q=${quality || 75}`}
+              unoptimized={true}
             />
           </div>
         </div>
@@ -125,17 +111,15 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-sm text-muted-foreground">{module.description}</CardDescription>
-                {imageUrls[module.id] && (
-                  <Image
-                    src={module.id === 1 ? "https://www.logisticsbusiness.com/wp-content/uploads/2016/12/Key-Visual_Logistics40.jpg" : imageUrls[module.id]}
-                    alt={`Logistics ${module.title}`}
-                    width={400}
-                    height={200}
-                    className="mt-4 rounded-md shadow-sm object-cover"
-                    loader={({src, width, quality}) => `${src}&w=${width}&q=${quality || 75}`}
-                    unoptimized={true}
-                  />
-                )}
+                <Image
+                  src={module.imageUrl}
+                  alt={`Logistics ${module.title}`}
+                  width={400}
+                  height={200}
+                  className="mt-4 rounded-md shadow-sm object-cover"
+                  loader={({src, width, quality}) => `${src}&w=${width}&q=${quality || 75}`}
+                  unoptimized={true}
+                />
               </CardContent>
             </Card>
           ))}
