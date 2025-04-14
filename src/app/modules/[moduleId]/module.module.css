@@ -1,0 +1,138 @@
+.moduleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 80vh;
+  padding: 20px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.moduleTitle {
+  text-3xl;
+  @media (min-width: 768px) {
+    font-size: 4xl;
+  }
+  @media (min-width: 1024px) {
+    font-size: 5xl;
+  }
+  font-weight: bold;
+  tracking-tight;
+  text-center;
+  margin-bottom: 20px;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.moduleContent {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.videoCard,
+.quizCard {
+  animation: slideInBottom 0.5s ease-out forwards;
+}
+
+.videoContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.videoContainer::after {
+  display: block;
+  content: "";
+  padding-bottom: 56.25%;
+  /* 16:9 aspect ratio */
+}
+
+.videoFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.quizContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.questionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.optionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.optionItem {
+  margin-bottom: 0.75rem;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.optionInput {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.nextButton {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.3s ease-in-out;
+}
+
+.quizComplete {
+  text-align: center;
+}
+
+.completeButton {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

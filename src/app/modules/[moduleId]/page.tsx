@@ -11,6 +11,8 @@ import {useToast} from '@/hooks/use-toast';
 import {useModuleStore} from '@/store/moduleStore';
 import {useAuth} from '@/hooks/use-auth';
 
+import styles from './module.module.css';
+
 const modulesData = [
   {
     id: 1,
@@ -210,19 +212,19 @@ export default function ModulePage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-4 md:p-8 lg:p-12">
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
+    <div className={styles.moduleContainer}>
+      <h1 className={styles.moduleTitle}>
         Модуль {moduleId} <span className="text-primary">Содержание</span>
       </h1>
 
-      <div className="w-full max-w-3xl">
-        <Card className="mb-6 animate-slide-in-bottom">
+      <div className={styles.moduleContent}>
+        <Card className={styles.videoCard}>
           <CardHeader>
             <CardTitle className="text-xl">Видео Лекция</CardTitle>
             <CardDescription className="text-sm">Посмотрите это видео, чтобы узнать больше о модуле.</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden shadow-lg">
+            <div className={styles.videoContainer}>
               {videoError ? (
                 <p>Не удалось загрузить видео.</p>
               ) : (
@@ -232,49 +234,49 @@ export default function ModulePage() {
                   allowFullScreen
                   onError={handleVideoError}
                   onEnded={() => setVideoWatched(true)}
-                  className="w-full h-full"
+                  className={styles.videoFrame}
                 />
               )}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="animate-slide-in-bottom">
+        <Card className={styles.quizCard}>
           <CardHeader>
             <CardTitle className="text-xl">Мини-Тест</CardTitle>
             <CardDescription className="text-sm">Проверьте свои знания с помощью этого короткого теста.</CardDescription>
           </CardHeader>
           <CardContent>
             {!quizCompleted ? (
-              <div>
-                <h2 className="text-lg font-semibold mb-4">{currentQuestion?.question}</h2>
-                <ul>
+              <div className={styles.quizContent}>
+                <h2 className={styles.questionTitle}>{currentQuestion?.question}</h2>
+                <ul className={styles.optionsList}>
                   {currentQuestion?.options.map((option, index) => (
-                    <li key={index} className="mb-2">
-                      <label className="flex items-center">
+                    <li key={index} className={styles.optionItem}>
+                      <label className={styles.optionLabel}>
                         <Input
                           type="radio"
                           name="answer"
                           value={option}
                           checked={selectedAnswer === option}
                           onChange={() => handleAnswerSelect(option)}
-                          className="mr-2"
+                          className={styles.optionInput}
                         />
                         {option}
                       </label>
                     </li>
                   ))}
                 </ul>
-                <Button onClick={handleNextQuestion} disabled={!selectedAnswer} className="transition-all duration-300">
+                <Button onClick={handleNextQuestion} disabled={!selectedAnswer} className={styles.nextButton}>
                   {currentQuestionIndex === questions.length - 1 ? 'Завершить Тест' : 'Следующий Вопрос'}
                 </Button>
               </div>
             ) : (
-              <div className="text-center">
+              <div className={styles.quizComplete}>
                 <h3 className="text-xl font-semibold mb-4">Тест Завершен!</h3>
                 <p className="text-lg">Ваш Счет: {score} / {questions.length}</p>
                 
-                  <Button onClick={handleCompleteModule} className="transition-all duration-300">
+                  <Button onClick={handleCompleteModule} className={styles.completeButton}>
                     Перейти к следующему модулю
                   </Button>
                 
