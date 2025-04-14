@@ -5,6 +5,7 @@ import {Button} from '@/components/ui/button';
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
+import {useEffect, useState} from 'react';
 
 const modulesData = [
   {
@@ -48,6 +49,20 @@ const generateImageUrl = (title: string) => {
 };
 
 export default function Home() {
+  const [imageUrls, setImageUrls] = useState({});
+
+  useEffect(() => {
+    const generateAllImageUrls = () => {
+      const urls = {};
+      modulesData.forEach((module) => {
+        urls[module.id] = generateImageUrl(module.title);
+      });
+      setImageUrls(urls);
+    };
+
+    generateAllImageUrls();
+  }, []);
+
   return (
     <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
       {/* Header */}
@@ -92,6 +107,7 @@ export default function Home() {
               width={400}
               height={300}
               className="object-cover rounded-md shadow-lg"
+              priority={true}
             />
           </div>
         </div>
@@ -108,13 +124,17 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-sm text-muted-foreground">{module.description}</CardDescription>
-                <Image
-                  src={generateImageUrl(module.title)}
-                  alt={`Logistics ${module.title}`}
-                  width={400}
-                  height={200}
-                  className="mt-4 rounded-md shadow-sm object-cover"
-                />
+                {imageUrls[module.id] && (
+                  <Image
+                    src={imageUrls[module.id]}
+                    alt={`Logistics ${module.title}`}
+                    width={400}
+                    height={200}
+                    className="mt-4 rounded-md shadow-sm object-cover"
+                    loader={({src, width, quality}) => `${src}&w=${width}&q=${quality || 75}`}
+                    unoptimized={true}
+                  />
+                )}
               </CardContent>
             </Card>
           ))}
@@ -123,4 +143,3 @@ export default function Home() {
     </div>
   );
 }
-
