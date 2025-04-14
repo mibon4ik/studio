@@ -226,21 +226,14 @@ export default function ModulePage() {
               {videoError ? (
                 <p>Не удалось загрузить видео.</p>
               ) : (
-                <>
-                  <iframe
-                    src={module.videoUrl}
-                    title="Rick Roll Video"
-                    allowFullScreen
-                    onError={handleVideoError}
-                    onEnded={() => setVideoWatched(true)}
-                    crossOrigin="anonymous"
-                  />
-                  <img
-                    src="https://picsum.photos/640/360"
-                    alt="Инфографика по логистике"
-                    className="mt-4 rounded-md shadow-lg"
-                  />
-                </>
+                <iframe
+                  src={module.videoUrl}
+                  title="Rick Roll Video"
+                  allowFullScreen
+                  onError={handleVideoError}
+                  onEnded={() => setVideoWatched(true)}
+                  className="w-full h-full rounded-md shadow-lg"
+                />
               )}
             </div>
           </CardContent>
