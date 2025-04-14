@@ -102,12 +102,13 @@ export default function Home() {
           </div>
           <div className="flex justify-center">
             <Image
-              src="https://images.pexels.com/photos/236077/pexels-photo-236077.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+              src="https://axelor.com/wp-content/uploads/2021/07/module_achats.png"
               alt="Logistics Overview"
               width={400}
               height={300}
-              className="object-cover rounded-md shadow-lg"
+              className="object-cover rounded-md shadow-lg about-image"
               priority={true}
+              style={{borderRadius: '12px'}}
             />
           </div>
         </div>

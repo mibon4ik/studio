@@ -28,11 +28,15 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'axelor.com',
+        port: '',
+        pathname: '/**',
+      },
       
     ],
   },
 };
 
 export default nextConfig;
-
-
