@@ -222,7 +222,7 @@ export default function ModulePage() {
             <CardDescription className="text-sm">Посмотрите это видео, чтобы узнать больше о модуле.</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="aspect-w-16 aspect-h-9">
+            <div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden shadow-lg">
               {videoError ? (
                 <p>Не удалось загрузить видео.</p>
               ) : (
@@ -232,7 +232,7 @@ export default function ModulePage() {
                   allowFullScreen
                   onError={handleVideoError}
                   onEnded={() => setVideoWatched(true)}
-                  className="w-full h-full rounded-md shadow-lg"
+                  className="w-full h-full"
                 />
               )}
             </div>
