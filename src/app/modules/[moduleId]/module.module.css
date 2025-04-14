@@ -1,3 +1,4 @@
+
 .moduleContainer {
   display: flex;
   flex-direction: column;
@@ -10,17 +11,12 @@
 }
 
 .moduleTitle {
-  text-3xl;
-  @media (min-width: 768px) {
-    font-size: 4xl;
-  }
-  @media (min-width: 1024px) {
-    font-size: 5xl;
-  }
+  font-size: 2.25rem;
+  /* 36px */
   font-weight: bold;
-  tracking-tight;
-  text-center;
+  text-align: center;
   margin-bottom: 20px;
+  color: var(--foreground);
   animation: fadeIn 0.5s ease-out forwards;
 }
 
@@ -30,19 +26,24 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+  /* Increased gap for better spacing */
 }
 
-.videoCard,
-.quizCard {
+/* Style for video card */
+.videoCard {
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
   animation: slideInBottom 0.5s ease-out forwards;
 }
 
 .videoContainer {
   position: relative;
   overflow: hidden;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  /* Slightly more rounded corners */
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
 }
 
 .videoContainer::after {
@@ -61,15 +62,23 @@
   border: 0;
 }
 
+/* Style for quiz card */
+.quizCard {
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  animation: slideInBottom 0.5s ease-out forwards;
+}
+
 .quizContent {
   display: flex;
   flex-direction: column;
 }
 
 .questionTitle {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.3rem;
+  color: var(--foreground);
 }
 
 .optionsList {
@@ -79,38 +88,40 @@
 }
 
 .optionItem {
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .optionLabel {
   display: flex;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
+  color: var(--foreground);
 }
 
 .optionInput {
-  margin-right: 0.5rem;
+  margin-right: 0.7rem;
   cursor: pointer;
 }
 
 .nextButton {
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  margin-top: 2rem;
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   border-radius: 9999px;
   transition: all 0.3s ease-in-out;
 }
 
+/* Style for quiz complete state */
 .quizComplete {
   text-align: center;
 }
 
 .completeButton {
-  margin-top: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  margin-top: 2rem;
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   border-radius: 9999px;
   transition: all 0.3s ease-in-out;
@@ -128,7 +139,7 @@
 
 @keyframes slideInBottom {
   from {
-    transform: translateY(20px);
+    transform: translateY(30px);
     opacity: 0;
   }
   to {
