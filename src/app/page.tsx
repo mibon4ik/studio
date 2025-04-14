@@ -127,7 +127,7 @@ export default function Home() {
                 <CardDescription className="text-sm text-muted-foreground">{module.description}</CardDescription>
                 {imageUrls[module.id] && (
                   <Image
-                    src={imageUrls[module.id]}
+                    src={module.id === 1 ? "https://www.logisticsbusiness.com/wp-content/uploads/2016/12/Key-Visual_Logistics40.jpg" : imageUrls[module.id]}
                     alt={`Logistics ${module.title}`}
                     width={400}
                     height={200}
