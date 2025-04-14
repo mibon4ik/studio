@@ -5,6 +5,7 @@ import {Input} from '@/components/ui/input';
 import {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {useAuth} from '@/hooks/use-auth';
+import styles from './login.module.css';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -24,8 +25,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 md:p-8 lg:p-12">
-      <div className="max-w-md w-full">
+    <div className={styles.container}>
+      <div className={styles.loginContainer}>
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-center mb-6 animate-fade-in">
           Авторизация
         </h1>
@@ -59,3 +60,4 @@ export default function LoginPage() {
     </div>
   );
 }
+
