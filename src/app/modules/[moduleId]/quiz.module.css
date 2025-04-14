@@ -33,11 +33,28 @@
   font-size: 1.1rem;
   cursor: pointer;
   color: var(--foreground);
+  text-align: left; /* Align text to the left */
 }
 
 .optionInput {
   margin-right: 0.7rem;
   cursor: pointer;
+}
+
+/* Align items in the label to the start */
+.optionLabel {
+  display: flex;
+  align-items: flex-start;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--foreground);
+}
+
+/* Move the radio button to the top */
+.optionInput {
+  margin-right: 0.7rem;
+  cursor: pointer;
+  margin-top: 0.3rem; /* Adjust as needed for vertical alignment */
 }
 
 .nextButton {
